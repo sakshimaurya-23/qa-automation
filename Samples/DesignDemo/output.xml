@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.1.1 (Python 3.13.1 on win32)" generated="2025-06-18T15:47:25.985530" rpa="false" schemaversion="5">
+<suite id="s1" name="Catalog" source="C:\CityFurnitureV1\Sprint1\CatalogDesignDemo\Catalog">
+<suite id="s1-s1" name="ItemFeed" source="C:\CityFurnitureV1\Sprint1\CatalogDesignDemo\Catalog\ItemFeed">
+<suite id="s1-s1-s1" name="TC001 BundleItemCreation" source="C:\CityFurnitureV1\Sprint1\CatalogDesignDemo\Catalog\ItemFeed\TC001_BundleItemCreation">
+<suite id="s1-s1-s1-s1" name="Test" source="C:\CityFurnitureV1\Sprint1\CatalogDesignDemo\Catalog\ItemFeed\TC001_BundleItemCreation\Test">
+<suite id="s1-s1-s1-s1-s1" name="TC001" source="C:\CityFurnitureV1\Sprint1\CatalogDesignDemo\Catalog\ItemFeed\TC001_BundleItemCreation\Test\TC001.robot">
+<test id="s1-s1-s1-s1-s1-t1" name="Create Regular Item" line="9">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>curDir:${CUR_DIR}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.117929" elapsed="0.000698"/>
+</kw>
+<kw name="Check folders" owner="keywords">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>curdir in check folders:${CUR_DIR}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.120430" elapsed="0.000607"/>
+</kw>
+<kw name="Process Suite" owner="generateRandomNumberAndReplaceAllXMLS">
+<msg time="2025-06-18T15:47:28.122178" level="INFO">${subfolders} = TC001.robot</msg>
+<var>${subfolders}</var>
+<arg>${CUR_DIR}</arg>
+<doc>Process only test cases that contain 'input' and 'setup' directories.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.121355" elapsed="0.000896"/>
+</kw>
+<return>
+<value>${subfolders}</value>
+<status status="PASS" start="2025-06-18T15:47:28.122393" elapsed="0.000121"/>
+</return>
+<msg time="2025-06-18T15:47:28.122918" level="INFO">${subfolders} = TC001.robot</msg>
+<var>${subfolders}</var>
+<arg>${CUR_DIR}</arg>
+<status status="PASS" start="2025-06-18T15:47:28.119388" elapsed="0.003594"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>subfolders:${subfolders}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.123795" elapsed="0.000550"/>
+</kw>
+<kw name="List Directories In Directory" owner="OperatingSystem">
+<msg time="2025-06-18T15:47:28.125216" level="INFO" html="true">Listing contents of directory '&lt;a href="file://C:\CityFurnitureV1\Sprint1\CatalogDesignDemo\Catalog\ItemFeed\TC001_BundleItemCreation\Test"&gt;C:\CityFurnitureV1\Sprint1\CatalogDesignDemo\Catalog\ItemFeed\TC001_BundleItemCreation\Test&lt;/a&gt;'.</msg>
+<msg time="2025-06-18T15:47:28.125665" level="INFO">0 directories:
+</msg>
+<msg time="2025-06-18T15:47:28.125823" level="INFO">${folders} = []</msg>
+<var>${folders}</var>
+<arg>${CUR_DIR}</arg>
+<doc>Wrapper for `List Directory` that returns only directories.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.124884" elapsed="0.000984"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-18T15:47:28.126658" level="INFO">${index} = 0</msg>
+<var>${index}</var>
+<arg>0</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.126414" elapsed="0.000290"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>beforeForLoop:${index}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.127078" elapsed="0.000377"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Process All JSON Files" owner="keywords">
+<arg>${CUR_DIR}</arg>
+<arg>${folder}</arg>
+<arg>${index}</arg>
+<status status="NOT RUN" start="2025-06-18T15:47:28.128678" elapsed="0.000071"/>
+</kw>
+<var name="${folder}"/>
+<status status="NOT RUN" start="2025-06-18T15:47:28.128273" elapsed="0.000574"/>
+</iter>
+<var>${folder}</var>
+<value>@{folders}</value>
+<status status="NOT RUN" start="2025-06-18T15:47:28.127938" elapsed="0.001001"/>
+</for>
+<doc>This test case validates the Create Regular Item</doc>
+<tag>Catalog</tag>
+<tag>REGRESSION</tag>
+<status status="PASS" start="2025-06-18T15:47:28.114165" elapsed="0.015199"/>
+</test>
+<status status="PASS" start="2025-06-18T15:47:26.067099" elapsed="2.063388"/>
+</suite>
+<status status="PASS" start="2025-06-18T15:47:26.064700" elapsed="2.067417"/>
+</suite>
+<status status="PASS" start="2025-06-18T15:47:26.062467" elapsed="2.071133"/>
+</suite>
+<suite id="s1-s1-s2" name="TC002 SubstituteItemCreation" source="C:\CityFurnitureV1\Sprint1\CatalogDesignDemo\Catalog\ItemFeed\TC002_SubstituteItemCreation">
+<suite id="s1-s1-s2-s1" name="Test" source="C:\CityFurnitureV1\Sprint1\CatalogDesignDemo\Catalog\ItemFeed\TC002_SubstituteItemCreation\Test">
+<suite id="s1-s1-s2-s1-s1" name="TC001" source="C:\CityFurnitureV1\Sprint1\CatalogDesignDemo\Catalog\ItemFeed\TC002_SubstituteItemCreation\Test\TC001.robot">
+<test id="s1-s1-s2-s1-s1-t1" name="Create Regular Item" line="9">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>curDir:${CUR_DIR}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.173242" elapsed="0.001300"/>
+</kw>
+<kw name="Check folders" owner="keywords">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>curdir in check folders:${CUR_DIR}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.175964" elapsed="0.000598"/>
+</kw>
+<kw name="Process Suite" owner="generateRandomNumberAndReplaceAllXMLS">
+<msg time="2025-06-18T15:47:28.178402" level="INFO">${subfolders} = TC001.robot</msg>
+<var>${subfolders}</var>
+<arg>${CUR_DIR}</arg>
+<doc>Process only test cases that contain 'input' and 'setup' directories.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.177130" elapsed="0.001377"/>
+</kw>
+<return>
+<value>${subfolders}</value>
+<status status="PASS" start="2025-06-18T15:47:28.178725" elapsed="0.000189"/>
+</return>
+<msg time="2025-06-18T15:47:28.179335" level="INFO">${subfolders} = TC001.robot</msg>
+<var>${subfolders}</var>
+<arg>${CUR_DIR}</arg>
+<status status="PASS" start="2025-06-18T15:47:28.175200" elapsed="0.004183"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>subfolders:${subfolders}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.179816" elapsed="0.000531"/>
+</kw>
+<kw name="List Directories In Directory" owner="OperatingSystem">
+<msg time="2025-06-18T15:47:28.181201" level="INFO" html="true">Listing contents of directory '&lt;a href="file://C:\CityFurnitureV1\Sprint1\CatalogDesignDemo\Catalog\ItemFeed\TC002_SubstituteItemCreation\Test"&gt;C:\CityFurnitureV1\Sprint1\CatalogDesignDemo\Catalog\ItemFeed\TC002_SubstituteItemCreation\Test&lt;/a&gt;'.</msg>
+<msg time="2025-06-18T15:47:28.181723" level="INFO">0 directories:
+</msg>
+<msg time="2025-06-18T15:47:28.181911" level="INFO">${folders} = []</msg>
+<var>${folders}</var>
+<arg>${CUR_DIR}</arg>
+<doc>Wrapper for `List Directory` that returns only directories.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.180891" elapsed="0.001071"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-18T15:47:28.182939" level="INFO">${index} = 0</msg>
+<var>${index}</var>
+<arg>0</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.182570" elapsed="0.000425"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>beforeForLoop:${index}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.183543" elapsed="0.000513"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Process All JSON Files" owner="keywords">
+<arg>${CUR_DIR}</arg>
+<arg>${folder}</arg>
+<arg>${index}</arg>
+<status status="NOT RUN" start="2025-06-18T15:47:28.185099" elapsed="0.000072"/>
+</kw>
+<var name="${folder}"/>
+<status status="NOT RUN" start="2025-06-18T15:47:28.184660" elapsed="0.000649"/>
+</iter>
+<var>${folder}</var>
+<value>@{folders}</value>
+<status status="NOT RUN" start="2025-06-18T15:47:28.184375" elapsed="0.001067"/>
+</for>
+<doc>This test case validates the Create Regular Item</doc>
+<tag>Catalog</tag>
+<tag>REGRESSION</tag>
+<status status="PASS" start="2025-06-18T15:47:28.172349" elapsed="0.013863"/>
+</test>
+<status status="PASS" start="2025-06-18T15:47:28.141463" elapsed="0.045892"/>
+</suite>
+<status status="PASS" start="2025-06-18T15:47:28.138227" elapsed="0.050930"/>
+</suite>
+<status status="PASS" start="2025-06-18T15:47:28.134875" elapsed="0.056261"/>
+</suite>
+<suite id="s1-s1-s3" name="TC003 RegularItemCreation" source="C:\CityFurnitureV1\Sprint1\CatalogDesignDemo\Catalog\ItemFeed\TC003_RegularItemCreation">
+<suite id="s1-s1-s3-s1" name="Test" source="C:\CityFurnitureV1\Sprint1\CatalogDesignDemo\Catalog\ItemFeed\TC003_RegularItemCreation\Test">
+<suite id="s1-s1-s3-s1-s1" name="TC001" source="C:\CityFurnitureV1\Sprint1\CatalogDesignDemo\Catalog\ItemFeed\TC003_RegularItemCreation\Test\TC001.robot">
+<test id="s1-s1-s3-s1-s1-t1" name="Create Regular Item" line="9">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>curDir:${CUR_DIR}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.227810" elapsed="0.001032"/>
+</kw>
+<kw name="Check folders" owner="keywords">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>curdir in check folders:${CUR_DIR}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.230241" elapsed="0.000537"/>
+</kw>
+<kw name="Process Suite" owner="generateRandomNumberAndReplaceAllXMLS">
+<msg time="2025-06-18T15:47:28.232112" level="INFO">${subfolders} = TC001.robot</msg>
+<var>${subfolders}</var>
+<arg>${CUR_DIR}</arg>
+<doc>Process only test cases that contain 'input' and 'setup' directories.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.231191" elapsed="0.000993"/>
+</kw>
+<return>
+<value>${subfolders}</value>
+<status status="PASS" start="2025-06-18T15:47:28.232308" elapsed="0.000091"/>
+</return>
+<msg time="2025-06-18T15:47:28.232632" level="INFO">${subfolders} = TC001.robot</msg>
+<var>${subfolders}</var>
+<arg>${CUR_DIR}</arg>
+<status status="PASS" start="2025-06-18T15:47:28.229565" elapsed="0.003113"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>subfolders:${subfolders}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.233400" elapsed="0.000814"/>
+</kw>
+<kw name="List Directories In Directory" owner="OperatingSystem">
+<msg time="2025-06-18T15:47:28.235010" level="INFO" html="true">Listing contents of directory '&lt;a href="file://C:\CityFurnitureV1\Sprint1\CatalogDesignDemo\Catalog\ItemFeed\TC003_RegularItemCreation\Test"&gt;C:\CityFurnitureV1\Sprint1\CatalogDesignDemo\Catalog\ItemFeed\TC003_RegularItemCreation\Test&lt;/a&gt;'.</msg>
+<msg time="2025-06-18T15:47:28.235430" level="INFO">0 directories:
+</msg>
+<msg time="2025-06-18T15:47:28.235581" level="INFO">${folders} = []</msg>
+<var>${folders}</var>
+<arg>${CUR_DIR}</arg>
+<doc>Wrapper for `List Directory` that returns only directories.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.234733" elapsed="0.000891"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-18T15:47:28.236447" level="INFO">${index} = 0</msg>
+<var>${index}</var>
+<arg>0</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.236130" elapsed="0.000389"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>beforeForLoop:${index}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-06-18T15:47:28.237067" elapsed="0.000653"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Process All JSON Files" owner="keywords">
+<arg>${CUR_DIR}</arg>
+<arg>${folder}</arg>
+<arg>${index}</arg>
+<status status="NOT RUN" start="2025-06-18T15:47:28.239606" elapsed="0.000089"/>
+</kw>
+<var name="${folder}"/>
+<status status="NOT RUN" start="2025-06-18T15:47:28.238447" elapsed="0.001357"/>
+</iter>
+<var>${folder}</var>
+<value>@{folders}</value>
+<status status="NOT RUN" start="2025-06-18T15:47:28.238153" elapsed="0.001743"/>
+</for>
+<doc>This test case validates the Create Regular Item</doc>
+<tag>Catalog</tag>
+<tag>REGRESSION</tag>
+<status status="PASS" start="2025-06-18T15:47:28.227007" elapsed="0.013630"/>
+</test>
+<status status="PASS" start="2025-06-18T15:47:28.199561" elapsed="0.042481"/>
+</suite>
+<status status="PASS" start="2025-06-18T15:47:28.195745" elapsed="0.048404"/>
+</suite>
+<status status="PASS" start="2025-06-18T15:47:28.192590" elapsed="0.053243"/>
+</suite>
+<status status="PASS" start="2025-06-18T15:47:26.059215" elapsed="2.188105"/>
+</suite>
+<status status="PASS" start="2025-06-18T15:47:25.989246" elapsed="2.259526"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="3" fail="0" skip="0">Catalog</stat>
+<stat pass="3" fail="0" skip="0">REGRESSION</stat>
+</tag>
+<suite>
+<stat pass="3" fail="0" skip="0" id="s1" name="Catalog">Catalog</stat>
+<stat pass="3" fail="0" skip="0" id="s1-s1" name="ItemFeed">Catalog.ItemFeed</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s1" name="TC001 BundleItemCreation">Catalog.ItemFeed.TC001 BundleItemCreation</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s1-s1" name="Test">Catalog.ItemFeed.TC001 BundleItemCreation.Test</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s1-s1-s1" name="TC001">Catalog.ItemFeed.TC001 BundleItemCreation.Test.TC001</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s2" name="TC002 SubstituteItemCreation">Catalog.ItemFeed.TC002 SubstituteItemCreation</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s2-s1" name="Test">Catalog.ItemFeed.TC002 SubstituteItemCreation.Test</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s2-s1-s1" name="TC001">Catalog.ItemFeed.TC002 SubstituteItemCreation.Test.TC001</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s3" name="TC003 RegularItemCreation">Catalog.ItemFeed.TC003 RegularItemCreation</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s3-s1" name="Test">Catalog.ItemFeed.TC003 RegularItemCreation.Test</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1-s3-s1-s1" name="TC001">Catalog.ItemFeed.TC003 RegularItemCreation.Test.TC001</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-06-18T15:47:26.210964" level="WARN">Imported library 'C:\CityFurnitureV1\Library\Scripts\env_variables.py' contains no keywords.</msg>
+</errors>
+</robot>

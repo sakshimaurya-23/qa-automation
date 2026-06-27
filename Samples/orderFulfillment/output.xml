@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.1.1 (Python 3.13.1 on win32)" generated="2025-08-18T12:55:28.605314" rpa="false" schemaversion="5">
+<suite id="s1" name="searchCustomer" source="C:\automation\AllProjects\city-tech-engineering-qa-automation-690065fb73e1\Sprint1\orderFulfillment\searchCustomer">
+<suite id="s1-s1" name="Test" source="C:\automation\AllProjects\city-tech-engineering-qa-automation-690065fb73e1\Sprint1\orderFulfillment\searchCustomer\Test">
+<suite id="s1-s1-s1" name="TC001" source="C:\automation\AllProjects\city-tech-engineering-qa-automation-690065fb73e1\Sprint1\orderFulfillment\searchCustomer\Test\TC001.robot">
+<test id="s1-s1-s1-t1" name="Search Customer TC001" line="14">
+<kw name="Search Customer V001" owner="keywords">
+<kw name="Invoke MultiApi2" owner="keywords">
+<kw name="Generic Input File2" owner="prepare_content">
+<msg time="2025-08-18T12:55:29.360575" level="INFO">${Req} = &lt;MultiApi&gt;
+	&lt;API FlowName="CTSearchCustomerWrapperSyncService"&gt;
+		&lt;Input&gt;
+			&lt;CTSearchCustomerWrapperSyncService OrganizationCode="CT_Furniture_INC" SearchString="Madav@gmail.com"/&gt;
+		&lt;/Input&gt;
+	&lt;/API&gt;...</msg>
+<var>${Req}</var>
+<arg>${CUR_DIR}</arg>
+<arg>${Input_file_Name}</arg>
+<status status="PASS" start="2025-08-18T12:55:29.338045" elapsed="0.022589"/>
+</kw>
+<kw name="Send Request to a post session" owner="keywords">
+<kw name="Set Environment Variables" owner="keywords">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-08-18T12:55:29.361679" level="INFO">${env_data} = {'URL': 'https://cityf-dev-1.oms.supply-chain.ibm.com/', 'USERNAME': 'admin', 'PASSWORD': 'password', 'CERTlOCATION': 'C://projects//city//tech//certificates//dev//dev.p12', 'CERTPASSWORD': 'a12345678...</msg>
+<var>${env_data}</var>
+<arg>env_variables.ENVIRONMENTS['${ENV}']</arg>
+<arg>modules=env_variables</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-08-18T12:55:29.361417" elapsed="0.000302"/>
+</kw>
+<return>
+<value>${env_data}</value>
+<status status="PASS" start="2025-08-18T12:55:29.361801" elapsed="0.000076"/>
+</return>
+<msg time="2025-08-18T12:55:29.361986" level="INFO">${env_data} = {'URL': 'https://cityf-dev-1.oms.supply-chain.ibm.com/', 'USERNAME': 'admin', 'PASSWORD': 'password', 'CERTlOCATION': 'C://projects//city//tech//certificates//dev//dev.p12', 'CERTPASSWORD': 'a12345678...</msg>
+<var>${env_data}</var>
+<status status="PASS" start="2025-08-18T12:55:29.361204" elapsed="0.000801"/>
+</kw>
+<kw name="Extract Cert Key From P12" owner="certificates">
+<msg time="2025-08-18T12:55:29.435712" level="INFO">Cert file path: C:\Users\003J2E~1\AppData\Local\Temp\tmpsfkuidsm
+Key file path: C:\Users\003J2E~1\AppData\Local\Temp\tmpx_jb_ekl</msg>
+<msg time="2025-08-18T12:55:29.435886" level="INFO">${cert_file} = C:\Users\003J2E~1\AppData\Local\Temp\tmpsfkuidsm</msg>
+<msg time="2025-08-18T12:55:29.435928" level="INFO">${key_file} = C:\Users\003J2E~1\AppData\Local\Temp\tmpx_jb_ekl</msg>
+<var>${cert_file}</var>
+<var>${key_file}</var>
+<arg>${env_data['CERTlOCATION']}</arg>
+<arg>${env_data['CERTPASSWORD']}</arg>
+<status status="PASS" start="2025-08-18T12:55:29.362113" elapsed="0.073840"/>
+</kw>
+<kw name="Create Secure Session With Client Cert" owner="sessionUtils">
+<arg>dev</arg>
+<arg>${env_data['URL']}</arg>
+<arg>${cert_file}</arg>
+<arg>${key_file}</arg>
+<arg>${True}</arg>
+<status status="PASS" start="2025-08-18T12:55:29.436186" elapsed="0.001007"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-08-18T12:55:29.438261" level="INFO">${params} = {'YFSEnvironment.progId': 'Test', 'InteropApiName': 'multiApi', 'ApiName': 'MultiApi', 'YFSEnvironment.userId': 'admin', 'YFSEnvironment.password': 'password', 'InteropApiData': '&lt;MultiApi&gt;\n\t&lt;API Fl...</msg>
+<var>${params}</var>
+<arg>YFSEnvironment.progId=Test</arg>
+<arg>InteropApiName=multiApi</arg>
+<arg>ApiName=MultiApi</arg>
+<arg>YFSEnvironment.userId=${env_data['USERNAME']}</arg>
+<arg>YFSEnvironment.password=${env_data['PASSWORD']}</arg>
+<arg>InteropApiData=${xmlRequest}</arg>
+<arg>timeout=30</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-08-18T12:55:29.437350" elapsed="0.000934"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-08-18T12:55:30.978879" level="INFO">POST Request : url=https://cityf-dev-1.oms.supply-chain.ibm.com/smcfs/interop/InteropHttpServlet?YFSEnvironment.progId=Test&amp;InteropApiName=multiApi&amp;ApiName=MultiApi&amp;YFSEnvironment.userId=admin&amp;YFSEnvironment.password=password&amp;InteropApiData=%3CMultiApi%3E%0A%09%3CAPI+FlowName%3D%22CTSearchCustomerWrapperSyncService%22%3E%0A%09%09%3CInput%3E%0A%09%09%09%3CCTSearchCustomerWrapperSyncService+OrganizationCode%3D%22CT_Furniture_INC%22+SearchString%3D%22Madav%40gmail.com%22%2F%3E%0A%09%09%3C%2FInput%3E%0A%09%3C%2FAPI%3E%0A%3C%2FMultiApi%3E&amp;timeout=30 
+ path_url=/smcfs/interop/InteropHttpServlet?YFSEnvironment.progId=Test&amp;InteropApiName=multiApi&amp;ApiName=MultiApi&amp;YFSEnvironment.userId=admin&amp;YFSEnvironment.password=password&amp;InteropApiData=%3CMultiApi%3E%0A%09%3CAPI+FlowName%3D%22CTSearchCustomerWrapperSyncService%22%3E%0A%09%09%3CInput%3E%0A%09%09%09%3CCTSearchCustomerWrapperSyncService+OrganizationCode%3D%22CT_Furniture_INC%22+SearchString%3D%22Madav%40gmail.com%22%2F%3E%0A%09%09%3C%2FInput%3E%0A%09%3C%2FAPI%3E%0A%3C%2FMultiApi%3E&amp;timeout=30 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-08-18T12:55:30.979209" level="INFO">POST Response : url=https://cityf-dev-1.oms.supply-chain.ibm.com/smcfs/interop/InteropHttpServlet?YFSEnvironment.progId=Test&amp;InteropApiName=multiApi&amp;ApiName=MultiApi&amp;YFSEnvironment.userId=admin&amp;YFSEnvironment.password=password&amp;InteropApiData=%3CMultiApi%3E%0A%09%3CAPI+FlowName%3D%22CTSearchCustomerWrapperSyncService%22%3E%0A%09%09%3CInput%3E%0A%09%09%09%3CCTSearchCustomerWrapperSyncService+OrganizationCode%3D%22CT_Furniture_INC%22+SearchString%3D%22Madav%40gmail.com%22%2F%3E%0A%09%09%3C%2FInput%3E%0A%09%3C%2FAPI%3E%0A%3C%2FMultiApi%3E&amp;timeout=30 
+ status=200, reason=OK 
+ headers={'x-frame-options': 'SAMEORIGIN', 'x-ua-compatible': 'IE=EmulateIE8', 'interopsentdata': 'true', 'content-type': 'text/xml; charset=UTF-8', 'content-language': 'en-US', 'vary': 'Accept-Encoding', 'content-encoding': 'gzip', 'set-cookie': 'JSESSIONID=0000b8wLPZB8BFMQxZBg_3HJo4P:b582832a-d6e6-46ed-a377-aa3c87c6d708; Path=/smcfs; Secure; HttpOnly', 'date': 'Mon, 18 Aug 2025 07:25:31 GMT', 'expires': 'Thu, 01 Dec 1994 16:00:00 GMT', 'cache-control': 'no-cache="set-cookie, set-cookie2"', 'x-envoy-upstream-service-time': '599', 'server': 'istio-envoy', 'transfer-encoding': 'chunked'} 
+ body=&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;MultiApi&gt;&lt;API Name=""&gt;&lt;Output&gt;&lt;CustomerList/&gt;&lt;/Output&gt;&lt;/API&gt;&lt;/MultiApi&gt; 
+ </msg>
+<msg time="2025-08-18T12:55:30.979531" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>dev</arg>
+<arg>${req_uri}</arg>
+<arg>params=${params}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-08-18T12:55:29.438393" elapsed="1.541208"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-08-18T12:55:30.980539" level="INFO">Request:&lt;MultiApi&gt;
+	&lt;API FlowName="CTSearchCustomerWrapperSyncService"&gt;
+		&lt;Input&gt;
+			&lt;CTSearchCustomerWrapperSyncService OrganizationCode="CT_Furniture_INC" SearchString="Madav@gmail.com"/&gt;
+		&lt;/Input&gt;
+	&lt;/API&gt;
+&lt;/MultiApi&gt;</msg>
+<arg>Request:${xmlRequest}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-08-18T12:55:30.980085" elapsed="0.000578"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-08-18T12:55:30.981280" level="INFO">Response Status Code :&lt;Response [200]&gt;</msg>
+<arg>Response Status Code :${resp}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-08-18T12:55:30.980982" elapsed="0.000404"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${resp.headers['Content-Type']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-08-18T12:55:30.982208" elapsed="0.001957"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-08-18T12:55:30.986123" level="INFO">Response XML:&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;MultiApi&gt;&lt;API Name=""&gt;&lt;Output&gt;&lt;CustomerList/&gt;&lt;/Output&gt;&lt;/API&gt;&lt;/MultiApi&gt;</msg>
+<arg>Response XML:${resp.content}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-08-18T12:55:30.984579" elapsed="0.001662"/>
+</kw>
+<return>
+<value>${resp}</value>
+<status status="PASS" start="2025-08-18T12:55:30.986386" elapsed="0.000106"/>
+</return>
+<msg time="2025-08-18T12:55:30.986793" level="INFO">${Resp} = &lt;Response [200]&gt;</msg>
+<var>${Resp}</var>
+<arg>${Req}</arg>
+<status status="PASS" start="2025-08-18T12:55:29.360927" elapsed="1.625927"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-08-18T12:55:30.989787" level="INFO">${createOrderResp} = &lt;Response [200]&gt;</msg>
+<arg>${createOrderResp}</arg>
+<arg>${Resp}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-08-18T12:55:30.987163" elapsed="0.002762"/>
+</kw>
+<return>
+<value>${Resp}</value>
+<status status="PASS" start="2025-08-18T12:55:30.990079" elapsed="0.000081"/>
+</return>
+<msg time="2025-08-18T12:55:30.990437" level="INFO">${getCustomerListResp} = &lt;Response [200]&gt;</msg>
+<var>${getCustomerListResp}</var>
+<arg>${CUR_DIR}</arg>
+<arg>${getCustomerList_Input_file_Name}</arg>
+<status status="PASS" start="2025-08-18T12:55:29.336864" elapsed="1.653633"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>getCustomerListRequest: ${getCustomerListResp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-08-18T12:55:30.990819" elapsed="0.000744"/>
+</kw>
+<kw name="Decode Bytes To String" owner="String">
+<msg time="2025-08-18T12:55:30.993566" level="INFO">${xml_content} = &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;MultiApi&gt;&lt;API Name=""&gt;&lt;Output&gt;&lt;CustomerList/&gt;&lt;/Output&gt;&lt;/API&gt;&lt;/MultiApi&gt;</msg>
+<var>${xml_content}</var>
+<arg>${getCustomerListResp.content}</arg>
+<arg>UTF-8</arg>
+<doc>Decodes the given ``bytes`` to a string using the given ``encoding``.</doc>
+<status status="PASS" start="2025-08-18T12:55:30.991954" elapsed="0.001683"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Decoded Customer Details XML: ${xml_content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-08-18T12:55:30.993924" elapsed="0.000596"/>
+</kw>
+<return>
+<value>${xml_content}</value>
+<status status="PASS" start="2025-08-18T12:55:30.994691" elapsed="0.000068"/>
+</return>
+<arg>${CUR_DIR}</arg>
+<arg>${getCustomerList_Input_file_Name}</arg>
+<status status="PASS" start="2025-08-18T12:55:29.336269" elapsed="1.658677"/>
+</kw>
+<doc>This test case validates for customer search</doc>
+<tag>SMOKE SearchCustomer</tag>
+<status status="PASS" start="2025-08-18T12:55:29.335080" elapsed="1.660441"/>
+</test>
+<test id="s1-s1-s1-t2" name="Create Customer TC001" line="19">
+<kw name="Create Customer V001" owner="keywords">
+<kw name="Invoke MultiApi2" owner="keywords">
+<kw name="Generic Input File2" owner="prepare_content">
+<msg time="2025-08-18T12:55:31.016577" level="INFO">${Req} = &lt;MultiApi&gt;
+	&lt;API FlowName="CTManageCustomerWrapperSyncService"&gt;
+		&lt;Input&gt;
+			&lt;Customer CustomerId="Surya" CustomerType="02" OrganizationCode="CT_Furniture_INC" Status="10"&gt;
+				&lt;CustomerContactList&gt;
+	...</msg>
+<var>${Req}</var>
+<arg>${CUR_DIR}</arg>
+<arg>${Input_file_Name}</arg>
+<status status="PASS" start="2025-08-18T12:55:30.998684" elapsed="0.017945"/>
+</kw>
+<kw name="Send Request to a post session" owner="keywords">
+<kw name="Set Environment Variables" owner="keywords">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-08-18T12:55:31.017870" level="INFO">${env_data} = {'URL': 'https://cityf-dev-1.oms.supply-chain.ibm.com/', 'USERNAME': 'admin', 'PASSWORD': 'password', 'CERTlOCATION': 'C://projects//city//tech//certificates//dev//dev.p12', 'CERTPASSWORD': 'a12345678...</msg>
+<var>${env_data}</var>
+<arg>env_variables.ENVIRONMENTS['${ENV}']</arg>
+<arg>modules=env_variables</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-08-18T12:55:31.017573" elapsed="0.000323"/>
+</kw>
+<return>
+<value>${env_data}</value>
+<status status="PASS" start="2025-08-18T12:55:31.017947" elapsed="0.000031"/>
+</return>
+<msg time="2025-08-18T12:55:31.018065" level="INFO">${env_data} = {'URL': 'https://cityf-dev-1.oms.supply-chain.ibm.com/', 'USERNAME': 'admin', 'PASSWORD': 'password', 'CERTlOCATION': 'C://projects//city//tech//certificates//dev//dev.p12', 'CERTPASSWORD': 'a12345678...</msg>
+<var>${env_data}</var>
+<status status="PASS" start="2025-08-18T12:55:31.017312" elapsed="0.000769"/>
+</kw>
+<kw name="Extract Cert Key From P12" owner="certificates">
+<msg time="2025-08-18T12:55:31.080746" level="INFO">Cert file path: C:\Users\003J2E~1\AppData\Local\Temp\tmpun21zhkq
+Key file path: C:\Users\003J2E~1\AppData\Local\Temp\tmp4vs7a4bt</msg>
+<msg time="2025-08-18T12:55:31.080917" level="INFO">${cert_file} = C:\Users\003J2E~1\AppData\Local\Temp\tmpun21zhkq</msg>
+<msg time="2025-08-18T12:55:31.080954" level="INFO">${key_file} = C:\Users\003J2E~1\AppData\Local\Temp\tmp4vs7a4bt</msg>
+<var>${cert_file}</var>
+<var>${key_file}</var>
+<arg>${env_data['CERTlOCATION']}</arg>
+<arg>${env_data['CERTPASSWORD']}</arg>
+<status status="PASS" start="2025-08-18T12:55:31.018172" elapsed="0.062802"/>
+</kw>
+<kw name="Create Secure Session With Client Cert" owner="sessionUtils">
+<arg>dev</arg>
+<arg>${env_data['URL']}</arg>
+<arg>${cert_file}</arg>
+<arg>${key_file}</arg>
+<arg>${True}</arg>
+<status status="PASS" start="2025-08-18T12:55:31.081197" elapsed="0.000947"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-08-18T12:55:31.083215" level="INFO">${params} = {'YFSEnvironment.progId': 'Test', 'InteropApiName': 'multiApi', 'ApiName': 'MultiApi', 'YFSEnvironment.userId': 'admin', 'YFSEnvironment.password': 'password', 'InteropApiData': '&lt;MultiApi&gt;\n\t&lt;API Fl...</msg>
+<var>${params}</var>
+<arg>YFSEnvironment.progId=Test</arg>
+<arg>InteropApiName=multiApi</arg>
+<arg>ApiName=MultiApi</arg>
+<arg>YFSEnvironment.userId=${env_data['USERNAME']}</arg>
+<arg>YFSEnvironment.password=${env_data['PASSWORD']}</arg>
+<arg>InteropApiData=${xmlRequest}</arg>
+<arg>timeout=30</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-08-18T12:55:31.082320" elapsed="0.000921"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-08-18T12:55:33.057890" level="INFO">POST Request : url=https://cityf-dev-1.oms.supply-chain.ibm.com/smcfs/interop/InteropHttpServlet?YFSEnvironment.progId=Test&amp;InteropApiName=multiApi&amp;ApiName=MultiApi&amp;YFSEnvironment.userId=admin&amp;YFSEnvironment.password=password&amp;InteropApiData=%3CMultiApi%3E%0A%09%3CAPI+FlowName%3D%22CTManageCustomerWrapperSyncService%22%3E%0A%09%09%3CInput%3E%0A%09%09%09%3CCustomer+CustomerId%3D%22Surya%22+CustomerType%3D%2202%22+OrganizationCode%3D%22CT_Furniture_INC%22+Status%3D%2210%22%3E%0A%09%09%09%09%3CCustomerContactList%3E%0A%09%09%09%09%09%3CCustomerContact+DateOfBirth%3D%222002-07-07%22+EmailID%3D%22Surya%40gmail.com%22+FirstName%3D%22G%22+LastName%3D%22Karan%22+MobilePhone%3D%224547438388%22%3E%0A%09%09%09%09%09%09%3CCustomerAdditionalAddressList%3E%0A%09%09%09%09%09%09%09%3CCustomerAdditionalAddress+IsDefaultShipTo%3D%22Y%22+IsShipTo%3D%22Y%22%3E%0A%09%09%09%09%09%09%09%09%3CPersonInfo+AddressLine1%3D%22608+Pawnee+Ave+Rule%22+AddressLine2%3D%22Olive+Ave+Peoria%22+City%3D%22Texas%22+Country%3D%22TX%22+EMailID%3D%22Kesav%40gmail.com%22+FirstName%3D%22Kesav%22+LastName%3D%22druv%22+Latitude%3D%22%22+Longitude%3D%22%22+MobilePhone%3D%227684338388%22+State%3D%22Arizona%22+ZipCode%3D%2279547%22%2F%3E%0A%09%09%09%09%09%09%09%3C%2FCustomerAdditionalAddress%3E%0A%09%09%09%09%09%09%09%3CCustomerAdditionalAddress+IsBillTo%3D%22Y%22+IsDefaultBillTo%3D%22Y%22%3E%0A%09%09%09%09%09%09%09%09%3CPersonInfo+AddressLine1%3D%22608+Pawnee+Ave+Rule%22+AddressLine2%3D%22Olive+Ave+Peoria%22+City%3D%22Texas%22+Country%3D%22TX%22+EMailID%3D%22Kesav%40gmail.com%22+FirstName%3D%22Kesav%22+LastName%3D%22druv%22+Latitude%3D%22%22+Longitude%3D%22%22+MobilePhone%3D%227684338388%22+State%3D%22Arizona%22+ZipCode%3D%2279547%22%2F%3E%0A%09%09%09%09%09%09%09%3C%2FCustomerAdditionalAddress%3E%0A%09%09%09%09%09%09%3C%2FCustomerAdditionalAddressList%3E%0A%09%09%09%09%09%3C%2FCustomerContact%3E%0A%09%09%09%09%3C%2FCustomerContactList%3E%0A%09%09%09%3C%2FCustomer%3E%0A%09%09%3C%2FInput%3E%0A%09%3C%2FAPI%3E%0A%3C%2FMultiApi%3E&amp;timeout=30 
+ path_url=/smcfs/interop/InteropHttpServlet?YFSEnvironment.progId=Test&amp;InteropApiName=multiApi&amp;ApiName=MultiApi&amp;YFSEnvironment.userId=admin&amp;YFSEnvironment.password=password&amp;InteropApiData=%3CMultiApi%3E%0A%09%3CAPI+FlowName%3D%22CTManageCustomerWrapperSyncService%22%3E%0A%09%09%3CInput%3E%0A%09%09%09%3CCustomer+CustomerId%3D%22Surya%22+CustomerType%3D%2202%22+OrganizationCode%3D%22CT_Furniture_INC%22+Status%3D%2210%22%3E%0A%09%09%09%09%3CCustomerContactList%3E%0A%09%09%09%09%09%3CCustomerContact+DateOfBirth%3D%222002-07-07%22+EmailID%3D%22Surya%40gmail.com%22+FirstName%3D%22G%22+LastName%3D%22Karan%22+MobilePhone%3D%224547438388%22%3E%0A%09%09%09%09%09%09%3CCustomerAdditionalAddressList%3E%0A%09%09%09%09%09%09%09%3CCustomerAdditionalAddress+IsDefaultShipTo%3D%22Y%22+IsShipTo%3D%22Y%22%3E%0A%09%09%09%09%09%09%09%09%3CPersonInfo+AddressLine1%3D%22608+Pawnee+Ave+Rule%22+AddressLine2%3D%22Olive+Ave+Peoria%22+City%3D%22Texas%22+Country%3D%22TX%22+EMailID%3D%22Kesav%40gmail.com%22+FirstName%3D%22Kesav%22+LastName%3D%22druv%22+Latitude%3D%22%22+Longitude%3D%22%22+MobilePhone%3D%227684338388%22+State%3D%22Arizona%22+ZipCode%3D%2279547%22%2F%3E%0A%09%09%09%09%09%09%09%3C%2FCustomerAdditionalAddress%3E%0A%09%09%09%09%09%09%09%3CCustomerAdditionalAddress+IsBillTo%3D%22Y%22+IsDefaultBillTo%3D%22Y%22%3E%0A%09%09%09%09%09%09%09%09%3CPersonInfo+AddressLine1%3D%22608+Pawnee+Ave+Rule%22+AddressLine2%3D%22Olive+Ave+Peoria%22+City%3D%22Texas%22+Country%3D%22TX%22+EMailID%3D%22Kesav%40gmail.com%22+FirstName%3D%22Kesav%22+LastName%3D%22druv%22+Latitude%3D%22%22+Longitude%3D%22%22+MobilePhone%3D%227684338388%22+State%3D%22Arizona%22+ZipCode%3D%2279547%22%2F%3E%0A%09%09%09%09%09%09%09%3C%2FCustomerAdditionalAddress%3E%0A%09%09%09%09%09%09%3C%2FCustomerAdditionalAddressList%3E%0A%09%09%09%09%09%3C%2FCustomerContact%3E%0A%09%09%09%09%3C%2FCustomerContactList%3E%0A%09%09%09%3C%2FCustomer%3E%0A%09%09%3C%2FInput%3E%0A%09%3C%2FAPI%3E%0A%3C%2FMultiApi%3E&amp;timeout=30 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-08-18T12:55:33.058290" level="INFO">POST Response : url=https://cityf-dev-1.oms.supply-chain.ibm.com/smcfs/interop/InteropHttpServlet?YFSEnvironment.progId=Test&amp;InteropApiName=multiApi&amp;ApiName=MultiApi&amp;YFSEnvironment.userId=admin&amp;YFSEnvironment.password=password&amp;InteropApiData=%3CMultiApi%3E%0A%09%3CAPI+FlowName%3D%22CTManageCustomerWrapperSyncService%22%3E%0A%09%09%3CInput%3E%0A%09%09%09%3CCustomer+CustomerId%3D%22Surya%22+CustomerType%3D%2202%22+OrganizationCode%3D%22CT_Furniture_INC%22+Status%3D%2210%22%3E%0A%09%09%09%09%3CCustomerContactList%3E%0A%09%09%09%09%09%3CCustomerContact+DateOfBirth%3D%222002-07-07%22+EmailID%3D%22Surya%40gmail.com%22+FirstName%3D%22G%22+LastName%3D%22Karan%22+MobilePhone%3D%224547438388%22%3E%0A%09%09%09%09%09%09%3CCustomerAdditionalAddressList%3E%0A%09%09%09%09%09%09%09%3CCustomerAdditionalAddress+IsDefaultShipTo%3D%22Y%22+IsShipTo%3D%22Y%22%3E%0A%09%09%09%09%09%09%09%09%3CPersonInfo+AddressLine1%3D%22608+Pawnee+Ave+Rule%22+AddressLine2%3D%22Olive+Ave+Peoria%22+City%3D%22Texas%22+Country%3D%22TX%22+EMailID%3D%22Kesav%40gmail.com%22+FirstName%3D%22Kesav%22+LastName%3D%22druv%22+Latitude%3D%22%22+Longitude%3D%22%22+MobilePhone%3D%227684338388%22+State%3D%22Arizona%22+ZipCode%3D%2279547%22%2F%3E%0A%09%09%09%09%09%09%09%3C%2FCustomerAdditionalAddress%3E%0A%09%09%09%09%09%09%09%3CCustomerAdditionalAddress+IsBillTo%3D%22Y%22+IsDefaultBillTo%3D%22Y%22%3E%0A%09%09%09%09%09%09%09%09%3CPersonInfo+AddressLine1%3D%22608+Pawnee+Ave+Rule%22+AddressLine2%3D%22Olive+Ave+Peoria%22+City%3D%22Texas%22+Country%3D%22TX%22+EMailID%3D%22Kesav%40gmail.com%22+FirstName%3D%22Kesav%22+LastName%3D%22druv%22+Latitude%3D%22%22+Longitude%3D%22%22+MobilePhone%3D%227684338388%22+State%3D%22Arizona%22+ZipCode%3D%2279547%22%2F%3E%0A%09%09%09%09%09%09%09%3C%2FCustomerAdditionalAddress%3E%0A%09%09%09%09%09%09%3C%2FCustomerAdditionalAddressList%3E%0A%09%09%09%09%09%3C%2FCustomerContact%3E%0A%09%09%09%09%3C%2FCustomerContactList%3E%0A%09%09%09%3C%2FCustomer%3E%0A%09%09%3C%2FInput%3E%0A%09%3C%2FAPI%3E%0A%3C%2FMultiApi%3E&amp;timeout=30 
+ status=200, reason=OK 
+ headers={'x-frame-options': 'SAMEORIGIN', 'x-ua-compatible': 'IE=EmulateIE8', 'interopsentdata': 'true', 'content-type': 'text/xml; charset=UTF-8', 'content-language': 'en-US', 'vary': 'Accept-Encoding', 'content-encoding': 'gzip', 'set-cookie': 'JSESSIONID=0000WnJCkFj72gPppyk8Q-QdTfh:d5e6a3d4-54fd-45f7-8184-59380b13eb6b; Path=/smcfs; Secure; HttpOnly', 'date': 'Mon, 18 Aug 2025 07:25:33 GMT', 'expires': 'Thu, 01 Dec 1994 16:00:00 GMT', 'cache-control': 'no-cache="set-cookie, set-cookie2"', 'x-envoy-upstream-service-time': '1109', 'server': 'istio-envoy', 'transfer-encoding': 'chunked'} 
+ body=&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;MultiApi&gt;&lt;API Name=""&gt;&lt;Output&gt;&lt;Customer CanConsumeSupplementalCapacity="N" CustomerID="100000074" CustomerKey="202508180725324503406" CustomerType="02" OrganizationCode="CT_Furniture_INC" SlotPreferenceType="NONE"&gt;&lt;CustomerSlotPreferenceList/&gt;&lt;/Customer&gt;&lt;/Output&gt;&lt;/API&gt;&lt;/MultiApi&gt; 
+ </msg>
+<msg time="2025-08-18T12:55:33.058519" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>dev</arg>
+<arg>${req_uri}</arg>
+<arg>params=${params}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-08-18T12:55:31.083348" elapsed="1.975210"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-08-18T12:55:33.059061" level="INFO">Request:&lt;MultiApi&gt;
+	&lt;API FlowName="CTManageCustomerWrapperSyncService"&gt;
+		&lt;Input&gt;
+			&lt;Customer CustomerId="Surya" CustomerType="02" OrganizationCode="CT_Furniture_INC" Status="10"&gt;
+				&lt;CustomerContactList&gt;
+					&lt;CustomerContact DateOfBirth="2002-07-07" EmailID="Surya@gmail.com" FirstName="G" LastName="Karan" MobilePhone="4547438388"&gt;
+						&lt;CustomerAdditionalAddressList&gt;
+							&lt;CustomerAdditionalAddress IsDefaultShipTo="Y" IsShipTo="Y"&gt;
+								&lt;PersonInfo AddressLine1="608 Pawnee Ave Rule" AddressLine2="Olive Ave Peoria" City="Texas" Country="TX" EMailID="Kesav@gmail.com" FirstName="Kesav" LastName="druv" Latitude="" Longitude="" MobilePhone="7684338388" State="Arizona" ZipCode="79547"/&gt;
+							&lt;/CustomerAdditionalAddress&gt;
+							&lt;CustomerAdditionalAddress IsBillTo="Y" IsDefaultBillTo="Y"&gt;
+								&lt;PersonInfo AddressLine1="608 Pawnee Ave Rule" AddressLine2="Olive Ave Peoria" City="Texas" Country="TX" EMailID="Kesav@gmail.com" FirstName="Kesav" LastName="druv" Latitude="" Longitude="" MobilePhone="7684338388" State="Arizona" ZipCode="79547"/&gt;
+							&lt;/CustomerAdditionalAddress&gt;
+						&lt;/CustomerAdditionalAddressList&gt;
+					&lt;/CustomerContact&gt;
+				&lt;/CustomerContactList&gt;
+			&lt;/Customer&gt;
+		&lt;/Input&gt;
+	&lt;/API&gt;
+&lt;/MultiApi&gt;</msg>
+<arg>Request:${xmlRequest}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-08-18T12:55:33.058843" elapsed="0.000299"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-08-18T12:55:33.059480" level="INFO">Response Status Code :&lt;Response [200]&gt;</msg>
+<arg>Response Status Code :${resp}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-08-18T12:55:33.059323" elapsed="0.000216"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${resp.headers['Content-Type']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-08-18T12:55:33.059714" elapsed="0.001440"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-08-18T12:55:33.061804" level="INFO">Response XML:&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;MultiApi&gt;&lt;API Name=""&gt;&lt;Output&gt;&lt;Customer CanConsumeSupplementalCapacity="N" CustomerID="100000074" CustomerKey="202508180725324503406" CustomerType="02" OrganizationCode="CT_Furniture_INC" SlotPreferenceType="NONE"&gt;&lt;CustomerSlotPreferenceList/&gt;&lt;/Customer&gt;&lt;/Output&gt;&lt;/API&gt;&lt;/MultiApi&gt;</msg>
+<arg>Response XML:${resp.content}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-08-18T12:55:33.061292" elapsed="0.000557"/>
+</kw>
+<return>
+<value>${resp}</value>
+<status status="PASS" start="2025-08-18T12:55:33.061900" elapsed="0.000033"/>
+</return>
+<msg time="2025-08-18T12:55:33.062040" level="INFO">${Resp} = &lt;Response [200]&gt;</msg>
+<var>${Resp}</var>
+<arg>${Req}</arg>
+<status status="PASS" start="2025-08-18T12:55:31.016941" elapsed="2.045121"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-08-18T12:55:33.062970" level="INFO">${createOrderResp} = &lt;Response [200]&gt;</msg>
+<arg>${createOrderResp}</arg>
+<arg>${Resp}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-08-18T12:55:33.062170" elapsed="0.000839"/>
+</kw>
+<return>
+<value>${Resp}</value>
+<status status="PASS" start="2025-08-18T12:55:33.063059" elapsed="0.000028"/>
+</return>
+<msg time="2025-08-18T12:55:33.063184" level="INFO">${createCustomerResp} = &lt;Response [200]&gt;</msg>
+<var>${createCustomerResp}</var>
+<arg>${CUR_DIR}</arg>
+<arg>${manageCustomerList_Input_file_Name}</arg>
+<status status="PASS" start="2025-08-18T12:55:30.998333" elapsed="2.064872"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>createOrderResp: ${createCustomerResp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-08-18T12:55:33.063311" elapsed="0.000211"/>
+</kw>
+<kw name="Decode Bytes To String" owner="String">
+<msg time="2025-08-18T12:55:33.064100" level="INFO">${xml_content} = &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;MultiApi&gt;&lt;API Name=""&gt;&lt;Output&gt;&lt;Customer CanConsumeSupplementalCapacity="N" CustomerID="100000074" CustomerKey="202508180725324503406" CustomerType="02" Organiza...</msg>
+<var>${xml_content}</var>
+<arg>${createCustomerResp.content}</arg>
+<arg>UTF-8</arg>
+<doc>Decodes the given ``bytes`` to a string using the given ``encoding``.</doc>
+<status status="PASS" start="2025-08-18T12:55:33.063625" elapsed="0.000497"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Decoded Customer Details XML: ${xml_content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-08-18T12:55:33.064285" elapsed="0.000316"/>
+</kw>
+<return>
+<value>${xml_content}</value>
+<status status="PASS" start="2025-08-18T12:55:33.064673" elapsed="0.000038"/>
+</return>
+<arg>${CUR_DIR}</arg>
+<arg>${manageCustomerList_Input_file_Name}</arg>
+<status status="PASS" start="2025-08-18T12:55:30.997898" elapsed="2.066905"/>
+</kw>
+<doc>This test case validates for create Customer</doc>
+<tag>SMOKE CreateCustomer</tag>
+<status status="PASS" start="2025-08-18T12:55:30.997027" elapsed="2.068063"/>
+</test>
+<status status="PASS" start="2025-08-18T12:55:28.629582" elapsed="4.436068"/>
+</suite>
+<status status="PASS" start="2025-08-18T12:55:28.628651" elapsed="4.437564"/>
+</suite>
+<status status="PASS" start="2025-08-18T12:55:28.607338" elapsed="4.459285"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">SMOKE CreateCustomer</stat>
+<stat pass="1" fail="0" skip="0">SMOKE SearchCustomer</stat>
+</tag>
+<suite>
+<stat pass="2" fail="0" skip="0" id="s1" name="searchCustomer">searchCustomer</stat>
+<stat pass="2" fail="0" skip="0" id="s1-s1" name="Test">searchCustomer.Test</stat>
+<stat pass="2" fail="0" skip="0" id="s1-s1-s1" name="TC001">searchCustomer.Test.TC001</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-08-18T12:55:28.687462" level="WARN">Imported library 'C:\automation\AllProjects\city-tech-engineering-qa-automation-690065fb73e1\Library\Scripts\env_variables.py' contains no keywords.</msg>
+</errors>
+</robot>

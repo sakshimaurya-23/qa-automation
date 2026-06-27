@@ -1,0 +1,12 @@
+<MultiApi>
+	<API Name="getOrderReleaseList">
+		<Input>
+			<OrderRelease OrderHeaderKey="${OrderHeaderKey}" />
+		</Input>
+		<Template>
+			<OrderReleaseList TotalOrderReleaseList="">
+				<OrderRelease OrderReleaseKey="" DocumentType="" EnterpriseCode="" SCAC="" CarrierServiceCode="" ShipNode=""/>
+			</OrderReleaseList>
+		</Template>
+	</API>
+</MultiApi>

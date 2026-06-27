@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MultiApi><API Name="getOrderDetails"><Output><Order MaxOrderStatus="1100" OrderHeaderKey="202508120709304366908" Status="Created"><OrderLines><OrderLine OrderLineKey="202508120709304366910" OrderedQty="12.00"/></OrderLines></Order></Output></API></MultiApi>

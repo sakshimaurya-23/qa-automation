@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.1.1 (Python 3.13.1 on win32)" generated="2025-08-20T17:44:37.123799" rpa="false" schemaversion="5">
+<suite id="s1" name="GetBearerTest" source="C:\automation\AllProjects\city-tech-engineering-qa-automation-690065fb73e1\Samples\utilTest\GetBearerTest.robot">
+<test id="s1-t1" name="Test To Get Bearer Token" line="11">
+<kw name="Initialize Token" owner="keywords">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-08-20T17:44:37.954405" level="INFO">${token_url} = https://api.watsoncommerce.ibm.com/inventory/us-1b8d5331/v1/oauth2/token</msg>
+<var>${token_url}</var>
+<arg>https://api.watsoncommerce.ibm.com/inventory/us-1b8d5331/v1/oauth2/token</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-08-20T17:44:37.954277" elapsed="0.000153"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-08-20T17:44:37.954630" level="INFO">${client_id} = LDvKQpNiCyr3NU8gEfPvC0gwOzpF0jkw</msg>
+<var>${client_id}</var>
+<arg>LDvKQpNiCyr3NU8gEfPvC0gwOzpF0jkw</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-08-20T17:44:37.954545" elapsed="0.000103"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-08-20T17:44:37.954802" level="INFO">${client_secret} = X3E2XV9wotpndnfvkipX7sGOqY6CqKpy</msg>
+<var>${client_secret}</var>
+<arg>X3E2XV9wotpndnfvkipX7sGOqY6CqKpy</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-08-20T17:44:37.954734" elapsed="0.000093"/>
+</kw>
+<kw name="Get Bearer Token" owner="generateBearerToken">
+<msg time="2025-08-20T17:44:38.423219" level="INFO">Bearer Token: YrQUbLeeFnxpMMMfWghs44n0CgRSCjcq</msg>
+<msg time="2025-08-20T17:44:38.423550" level="INFO">${token} = YrQUbLeeFnxpMMMfWghs44n0CgRSCjcq</msg>
+<var>${token}</var>
+<arg>${token_url}</arg>
+<arg>${client_id}</arg>
+<arg>${client_secret}</arg>
+<status status="PASS" start="2025-08-20T17:44:37.954901" elapsed="0.468718"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-08-20T17:44:38.424904" level="INFO">${dev_b_token} = YrQUbLeeFnxpMMMfWghs44n0CgRSCjcq</msg>
+<arg>${dev_b_token}</arg>
+<arg>${token}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-08-20T17:44:38.424275" elapsed="0.000757"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-08-20T17:44:38.425724" level="INFO">Token initialized: YrQUbLeeFnxpMMMfWghs44n0CgRSCjcq</msg>
+<arg>Token initialized: ${dev_b_token}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-08-20T17:44:38.425372" elapsed="0.000456"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Token initialized: ${dev_b_token}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-08-20T17:44:38.426131" elapsed="0.000668"/>
+</kw>
+<status status="PASS" start="2025-08-20T17:44:37.953479" elapsed="0.473552"/>
+</kw>
+<status status="PASS" start="2025-08-20T17:44:37.952760" elapsed="0.475200"/>
+</test>
+<status status="PASS" start="2025-08-20T17:44:37.125534" elapsed="1.304195"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="GetBearerTest">GetBearerTest</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-08-20T17:44:37.223228" level="WARN">Imported library 'C:\automation\AllProjects\city-tech-engineering-qa-automation-690065fb73e1\Library\Scripts\env_variables.py' contains no keywords.</msg>
+</errors>
+</robot>

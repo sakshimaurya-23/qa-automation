@@ -1,0 +1,9 @@
+<MultiApi>
+    <API Name="scheduleOrder">
+        <Input>
+            <ScheduleOrder CheckInventory="Y" DocumentType="" EnterpriseCode="CT_Furniture_INC"
+                IgnoreMinNotificationTime="Y" OrderNo="CITY-Order-20250613_10" PrimeLineNo="1"
+                ScheduleAndRelease="" SubLineNo="1"/>
+        </Input>
+    </API>
+</MultiApi>

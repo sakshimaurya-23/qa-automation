@@ -1,0 +1,11 @@
+<MultiApi>
+	<API Name="createShipment">
+		<Input>
+			<Shipment EnterpriseCode="CT_Furniture_INC" DocumentType="0001" ShipNode="STR_1" ShipmentNo="SHP_CITY-20250612_18" OrderNo="CITY-Order-20250612_18" ExpectedShipmentDate="2025-06-28" ExpectedDeliveryDate="2025-06-29" RequestedDeliveryDate="2025-06-29" CarrierServiceCode="">
+				<ShipmentLines>
+					<ShipmentLine ItemID="Item_June12" ProductClass="GOOD" UnitOfMeasure="EACH" DocumentType="0001" OrderNo="CITY-Order-20250612_18" PrimeLineNo="1" Quantity="2" ReleaseNo="1" SubLineNo="1"/>
+				</ShipmentLines>
+			</Shipment>
+		</Input>
+	</API>
+</MultiApi>

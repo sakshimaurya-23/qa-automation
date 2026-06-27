@@ -1,0 +1,9 @@
+<MultiApi>
+    <API Name="confirmShipment">
+        <Input>
+            <Shipment ShipComplete="Y" IgnoreOrdering="Y" ShipNode="STR_1" SellerOrganizationCode="CT_Furniture" ShipmentNo="SHP_CITY-20250612_18" EnterpriseCode="CT_Furniture_INC" OverrideModificationRules="Y">
+            <ToAddress AddressLine1="vj HEALTH SERVICES" AddressLine2="4822 50TH ST SEDGEWICK" AddressLine3="" AddressLine4="" AddressLine5="" AddressLine6="" AlternateEmailID="" Beeper="" City="SEDGEWICK" Company="" Country="US" DayFaxNo="" DayPhone="" Department="" EMailID="" EveningFaxNo="" EveningPhone="" FirstName="vj" JobTitle="" LastName="vj FROM PROVINCE A" MiddleName="" MobilePhone="" OtherPhone="" PersonID="" PersonInfoKey="" State="MA" Suffix="" Title="" ZipCode="32958"/>
+            </Shipment>
+        </Input>
+    </API>
+</MultiApi>

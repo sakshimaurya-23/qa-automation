@@ -1,0 +1,8 @@
+<MultiApi>
+	<API Name="changeOrderStatus">
+		<Input>
+			<OrderStatusChange AuditTransactionId="" BaseDropStatus="3200.10" ChangeForAllAvailableQty="" DocumentType="0001" EnterpriseCode="CT_Furniture_INC" IgnoreTransactionDependencies="Y" ModificationReasonCode="" ModificationReasonText="" ModificationReference1="" ModificationReference2="" ModificationReference3="" ModificationReference4="" OrderHeaderKey="" OrderNo="CITY-Order-20250612_18" OrderReleaseKey="" ReleaseNo="" SelectMethod="" SuppressStatusChangeAudits="" TransactionId="READY_FOR_SHIP.0001.ex">
+            </OrderStatusChange>
+		</Input>
+	</API>
+</MultiApi>
