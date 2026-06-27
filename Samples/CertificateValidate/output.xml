@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.1.1 (Python 3.13.1 on win32)" generated="2025-04-24T13:54:34.419598" rpa="false" schemaversion="5">
+<suite id="s1" name="Test" source="C:\CityFurnitureV1\Sprint1\Test\Test.robot">
+<test id="s1-t1" name="Access With P12 Certificate" line="8">
+<kw name="Request With P12" owner="certificates">
+<msg time="2025-04-24T13:54:34.876262" level="INFO">${cert_file} = C:\Users\003J2E~1\AppData\Local\Temp\tmp1pz55ib1</msg>
+<msg time="2025-04-24T13:54:34.876362" level="INFO">${key_file} = C:\Users\003J2E~1\AppData\Local\Temp\tmpdt7l3lkt</msg>
+<var>${cert_file}</var>
+<var>${key_file}</var>
+<arg>https://cityf-dev-1.oms.supply-chain.ibm.com/</arg>
+<arg>C://projects//city//tech//certificates//dev//dev.p12</arg>
+<arg>a12345678</arg>
+<status status="PASS" start="2025-04-24T13:54:34.809516" elapsed="0.066888"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>cert:${cert_file}</arg>
+<arg>key:${key_file}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-04-24T13:54:34.876900" elapsed="0.001112"/>
+</kw>
+<status status="PASS" start="2025-04-24T13:54:34.808764" elapsed="0.069773"/>
+</test>
+<status status="PASS" start="2025-04-24T13:54:34.421429" elapsed="0.458090"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Test">Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
