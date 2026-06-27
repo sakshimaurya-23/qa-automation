@@ -1,0 +1,17 @@
+<MultiApi>
+	<API FlowName="CITYProcessItemFeed">
+	<Input>
+		<ItemList>
+	<Item Action="Manage" ItemGroupCode="PROD" ItemID="9732506_Bundle_S01" OrganizationCode="CT_Furniture_INC" UnitOfMeasure="EACH">
+		<Extn ExtnIsOnlineAllowed="Y" ExtnSubstituteItem="" ExtnIsDiscontinued="N"/>
+		<PrimaryInformation CostCurrency="USD" DefaultProductClass="GOOD" Description="Rest and Renew Performance Max Soft Low-profile Mattress Set" ExtendedDescription="Includes: Mattress and 5.5low-profile foundation Part of our exclusive Rest and Renew line, the exclusive Performance Max 14.5 mattress is designed for those seeking the most refreshing and restorative sleep experience. This foam design features a plush comfort level, making it perfect for side and back sleepers." IsReturnable="Y" ItemType="" KitCode="BUNDLE" ReturnWindow="15" ShortDescription="Rest and Renew Performance Max Soft Low-profile Mattress Set" UnitCost="98.5" ImageID="S2309728042R00_Q_SG_DORAL_BLK_UP_SP_BD.jpeg" ImageLabel="" ImageLocation="https://embed.widencdn.net/img/cityfurniture/1oytgah6xz/640px" IsShippingAllowed="Y" IsDeliveryAllowed="Y" IsPickupAllowed="Y"  BundleFulfillmentMode="01" TaxableFlag="Y" PrimarySupplier="" SizeCode="" UnitHeight="10" UnitHeightUOM="IN" UnitLength="10" UnitLengthUOM="IN" UnitWeight="10" UnitWeightUOM="LBS" UnitWidth="10" UnitWidthUOM="IN" Status="3000"/>
+		<Components>
+			<Component ComponentItemID="9730154_01" ComponentOrganizationCode="CT_Furniture_INC" ComponentUnitOfMeasure="EACH" KitQuantity="1"/>
+			<Component ComponentItemID="9732924_01" ComponentOrganizationCode="CT_Furniture_INC" ComponentUnitOfMeasure="EACH" KitQuantity="4"/>
+		</Components>
+		<WMSItemAttributes PackedHeight="10" PackedLength="10" PackedWidth="10"/>
+	</Item>
+</ItemList>
+</Input>
+		</API>
+</MultiApi>
