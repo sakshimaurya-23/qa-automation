@@ -1,0 +1,13 @@
+<MultiApi>
+	<API FlowName="CITYProcessItemFeed">
+		<Input>
+			<ItemList>
+				<Item Action="Manage" ItemGroupCode="PROD" ItemID="25062025_02" OrganizationCode="CT_Furniture_INC" UnitOfMeasure="EACH">
+					<Extn ExtnIsOnlineAllowed="Y" ExtnSubstituteItem="" ExtnIsDiscontinued="N"/>
+					<PrimaryInformation CostCurrency="USD" DefaultProductClass="GOOD" Description="the edgartown-white-side-chair" ExtendedDescription="The Coastal charm comes at a very affordable price with the Edgartown collection. A crisp finish, clean lines, and an overall relaxed look fills your dining room with seaside style. The side chair here is made from solid wood, featuring a diamond-slat back and beautifully crafted legs with subtle tapering for a nod to timeless design." IsSubOnOrderAllowed="Y" IsReturnable="Y" ItemType="" KitCode="" ReturnWindow="15" ShortDescription="the edgartown-white-side-chair" UnitCost="75.00" ImageID="S2204020504R00_FI_EDGAR_WHT_S_CHR.jpeg" ImageLabel="" ImageLocation="https://embed.widencdn.net/img/cityfurniture/eqyzxu3wr5/640px/S2204020504R00_FI_EDGAR_WHT_S_CHR.jpeg?keep=c&amp;crop=no&amp;quality=80&amp;u=m2xgp2" IsShippingAllowed="Y" IsDeliveryAllowed="Y" IsPickupAllowed="Y" BundleFulfillmentMode="01" TaxableFlag="Y" PrimarySupplier="" SizeCode="" UnitHeight="10" UnitHeightUOM="IN" UnitLength="10" UnitLengthUOM="IN" UnitWeight="10" UnitWeightUOM="LBS" UnitWidth="10" UnitWidthUOM="IN" Status="3000"/>
+					<WMSItemAttributes PackedHeight="10" PackedLength="10" PackedWidth="10"/>
+				</Item>
+			</ItemList>
+		</Input>
+	</API>
+</MultiApi>
