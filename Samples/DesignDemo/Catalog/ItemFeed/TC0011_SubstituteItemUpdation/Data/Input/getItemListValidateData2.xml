@@ -1,0 +1,121 @@
+<MultiApi>
+	<API Name="getItemDetails">
+		<Input>
+			<Item ItemID="25062025_03" OrganizationCode="CT_Furniture_INC" UnitOfMeasure="EACH"/>
+		</Input>
+		<Template>
+			<Item CanUseAsServiceTool="" GlobalItemID="" InheritAttributesFromClassification="" IsItemSuperseded="" ItemGroupCode="" ItemKey=""  OrganizationCode="Required" SubCatalogOrganizationCode="" UnitOfMeasure="">
+<ItemAttributeGroupTypeList>
+<ItemAttributeGroupType ClassificationPurposeCode="" Description="" IsForMaintenance="" IsForSelling="" IsSingleGroup="" IsValidForCategory="" IsValidForClassification="" ItemAttributeGroupType="" ItemAttributeGroupTypeKey="">
+<ItemAttributeGroupList>
+<ItemAttributeGroup ItemAttributeGroupDescription="" ItemAttributeGroupID="" ItemAttributeGroupKey="" ItemAttributeGroupPath="" ParentItemAttributeGroupKey="" SequenceNo="">
+<ItemAttributeList>
+<ItemAttribute AttributeDomainID="" AttributeGroupID="" CategoryKey="" IsInherited="" IsKeyAttribute="" ItemAttributeDescription="" ItemAttributeGroupKey="" ItemAttributeGroupType="" ItemAttributeKey="" ItemAttributeName="" SequenceNo="" Value="">
+<Attribute AllowMultipleValues="" AllowedValueLength="" AttributeDomainID="" AttributeGroupID="" AttributeID="" AttributeKey="" AttributePostFix="" DataType="" DerivedFromAttributeKey="" IsAllowedValueDefined="" IsValueMandatory="" LongDescription="" OrganizationCode="" SequenceNo="" ShortDescription="">
+<DerivedFromAttribute AttributeDomainID="" AttributeGroupID="" AttributeID="" AttributeKey="" OrganizationCode="" ShortDescription=""/>
+<AttributeReference AttributeKey="" AttributeReferenceKey="" ReferenceName="" TableName=""/>
+<AttributeAllowedValueList TotalNumberOfRecords="">
+<AttributeAllowedValue AttributeAllowedValueKey="" AttributeKey="" IsDefaultValue="" LongDescription="" NumericStep="" SequenceNo="" ShortDescription="" Value=""/>
+</AttributeAllowedValueList>
+</Attribute>
+<AssignedValueList>
+<AssignedValue DoubleValue="" IntegerValue="" IsInherited="" LongDescription="" SequenceNo="" ShortDescription="" Value=""/>
+</AssignedValueList>
+</ItemAttribute>
+</ItemAttributeList>
+<ItemAttrGroupLocaleList TotalNumberOfRecords="">
+<ItemAttrGroupLocale Country="" ItemAttrGroupKey="" ItemAttrGroupLocaleKey="" ItemAttributeGroupDescription="" Language="" Variant=""/>
+</ItemAttrGroupLocaleList>
+</ItemAttributeGroup>
+</ItemAttributeGroupList>
+<ItemAttrGrpTypeLocaleList TotalNumberOfRecords="">
+<ItemAttrGrpTypeLocale Country="" Description="" ItemAttrGroupTypeKey="" ItemAttrGrpTypeLocaleKey="" Language="" Variant=""/>
+</ItemAttrGrpTypeLocaleList>
+</ItemAttributeGroupType>
+</ItemAttributeGroupTypeList>
+<WMSItemAttributes ConstrainedByHeight="" Deformable="" PackByVolume="" PackedHeight="" PackedLength="" PackedWidth="" StackHeightIncrease="" Stackable=""/>
+<!--
+InheritedAttributes is a template-driven element but its attributes and children elements are not.
+
+If the item attribute is not defied at item level and the same is defied at classification level,
+The System will display the <InheritedAttribute> element in the output XML.  The output will publish the name, value and the classification path.
+ -->
+<InheritedAttributes>
+<InheritedAttribute InheritedFrom="" IsInherited="" Name="" Value=""/>
+</InheritedAttributes>
+<AssetList TotalNumberOfRecords="">
+<Asset AssetID="" AssetKey="" ContentID="" ContentLocation="" ContentSize="" Description="" Label="" Type="">
+<AssetLocaleList TotalNumberOfRecords="">
+<AssetLocale AssetKey="" AssetLocaleKey="" ContentID="" ContentLocation="" Country="" Description="" Label="" Language="" Variant=""/>
+</AssetLocaleList>
+</Asset>
+</AssetList>
+<ItemLocaleList TotalNumberOfRecords="">
+<ItemLocale Country="" ItemKey="" ItemLocaleKey="" Language="" Variant="">
+<PrimaryInformation Description="" ShortDescription=""/>
+</ItemLocale>
+</ItemLocaleList>
+<WIPCostFactorPurpose CostFactorGroupKey="" CostFactorGroupName=""/>
+<PrimaryInformation AgeVerificationCode="" AllowGiftWrap="" AssumeInfiniteInventory="" BundleFulfillmentMode="" BundlePricingStrategy="PARENT" CapacityPerOrderedQty="" CapacityQuantityStrategy="" ColorCode="" ComputedUnitCost="" ConfigurationKey="" ConfigurationModelName="" ConfiguredModelKey="" CostCurrency="" CountryOfOrigin="" CreditWOReceipt="" DefaultProductClass="" Description="" DisplayItemDescription="" EffectiveEndDate="" EffectiveStartDate=""  FixedCapacityQtyPerLine="" FixedPricingQtyPerLine="" ImageID="" ImageLabel="" ImageLocation="" InvoiceBasedOnActuals="" InvolvesSegmentChange="" IsAirShippingAllowed="" IsConfigurable="" IsDeliveryAllowed="" IsEligibleForShippingDiscount="" IsForwardingAllowed="" IsFreezerRequired="" IsHazmat="" IsModelItem="" IsParcelShippingAllowed="" IsPickupAllowed="" IsPreConfigured="" IsProcurementAllowed="" IsReturnService="" IsReturnable="" IsShippingAllowed="" IsSoldSeparately="" IsStandaloneService="" IsSubOnOrderAllowed="" IsValid="" ItemType="" Keywords="" KitCode="" ManufacturerItem="" ManufacturerItemDesc="" ManufacturerName="" MasterCatalogID="" MaxOrderQuantity="" MaxReturnWindow="" MinOrderQuantity="" MinReturnWindow="" MinimumCapacityQuantity="" ModelItemUnitOfMeasure="" NumSecondarySerials="" OrderingQuantityStrategy="" PricingQuantityConvFactor="" PricingQuantityStrategy="" PricingUOM="" PricingUOMStrategy="" PrimaryEnterpriseCode="" PrimarySupplier="" ProductLine="" RequiresProdAssociation="" ReturnWindow="" RunQuantity="" SerializedFlag="" ServiceTypeID="" ShipmentConsolidationWindow="" ShortDescription="" SizeCode="" Status="" TaxableFlag="" UnitCost="" UnitHeight="" UnitHeightUOM="" UnitLength="" UnitLengthUOM="" UnitVolume="" UnitVolumeUOM="" UnitWeight="" UnitWeightUOM="" UnitWidth="" UnitWidthUOM=""/>
+<SafetyFactorDefinitions>
+<SafetyFactorDefinition DeliveryMethod="" FutureSafetyFactorPercentage="" OnhandSafetyFactorPercentage="" OnhandSafetyFactorQuantity=""/>
+</SafetyFactorDefinitions>
+<InventoryParameters ATPRule="" AdvanceNotificationTime="" DefaultExpirationDays="" FutureSafetyFactorPercentage="" InventoryMonitorRule="" IsFifoTracked="" IsItemBasedAllocationAllowed="" IsSerialTracked="" LeadTime="" MaximumNotificationTime="" MinNotificationTime="" NodeLevelInventoryMonitorRule="" OnhandSafetyFactorPercentage="" OnhandSafetyFactorQuantity="" ProcessingTime="" RequiresDGOverride="" TagControlFlag="" TagReqAtReceipt="" TagReqAtShipment="" TimeSensitive="" UseUnplannedInventory=""/>
+<ClassificationCodes CommodityCode="" ECCNNo="" HarmonizedCode="" HazmatClass="" Model="" NAICSCode="" NMFCClass="" NMFCCode="" OperationalConfigurationComplete="" PickingType="" PostingClassification="" Schedule_B_Code="" StorageType="" TaxProductCode="" UNSPSC="" VelocityCode=""/>
+<HazmatInformation CargoAir="" Exception="" HazardClass="" HazmatComplianceKey="" Label="" PackingGroup="" PassengerAir="" ProperShippingName="" QtyBulk="" QtyNonBulk="" SortOrder="" SpecialProvisions="" Symbols="" UNNumber="" Vessel="" VesselSP=""/>
+<ItemServiceSkillList>
+<ItemServiceSkill Description="" ServiceSkillId=""/>
+</ItemServiceSkillList>
+<ItemAliasList>
+<ItemAlias AliasName="" AliasValue=""/>
+</ItemAliasList>
+<ItemExclusionList>
+<ItemExclusion ExclusionCode=""/>
+</ItemExclusionList>
+<AdditionalAttributeList>
+<AdditionalAttribute AdditionalAttributeKey="" AttributeDomainID="" AttributeGroupID="" DoubleValue="" IntegerValue="" IsInherited="" Name="" Value=""/>
+</AdditionalAttributeList>
+<LanguageDescriptionList>
+<LanguageDescription Description="" ExtendedDescription="" ExtendedDisplayDescription="" LocaleCode="" ShortDescription=""/>
+</LanguageDescriptionList>
+<Components>
+<Component ComponentDescription="" ComponentItemGroupCode="" ComponentItemID="" ComponentItemKey="" ComponentKitCode="" ComponentOrganizationCode="" ComponentUnitOfMeasure="" ItemKey="" KitQuantity="">
+<Item CanUseAsServiceTool="" GlobalItemID="" IsItemSuperseded="" ItemGroupCode="" ItemID="" ItemKey="" OrganizationCode="" SubCatalogOrganizationCode="" UnitOfMeasure="">
+<PrimaryInformation AgeVerificationCode="" AllowGiftWrap="" AssumeInfiniteInventory="" BundleFulfillmentMode="" BundlePricingStrategy="PARENT" CapacityPerOrderedQty="" CapacityQuantityStrategy="" ColorCode="" ComputedUnitCost="" ConfigurationKey="" ConfigurationModelName="" ConfiguredModelKey="" CostCurrency="" CountryOfOrigin="" CreditWOReceipt="" DefaultProductClass="" Description="" DisplayItemDescription="" EffectiveEndDate="" EffectiveStartDate="" ExtendedDescription="" ExtendedDisplayDescription="" FixedCapacityQtyPerLine="" FixedPricingQtyPerLine="" ImageID="" ImageLabel="" ImageLocation="" InvoiceBasedOnActuals="" InvolvesSegmentChange="" IsAirShippingAllowed="" IsConfigurable="" IsDeliveryAllowed="" IsEligibleForShippingDiscount="" IsForwardingAllowed="" IsFreezerRequired="" IsHazmat="" IsModelItem="" IsParcelShippingAllowed="" IsPickupAllowed="" IsPreConfigured="" IsProcurementAllowed="" IsReturnService="" IsReturnable="" IsShippingAllowed="" IsSoldSeparately="" IsStandaloneService="" IsSubOnOrderAllowed="" IsValid="" ItemType="" Keywords="" KitCode="" ManufacturerItem="" ManufacturerItemDesc="" ManufacturerName="" MasterCatalogID="" MaxOrderQuantity="" MaxReturnWindow="" MinOrderQuantity="" MinReturnWindow="" MinimumCapacityQuantity="" ModelItemUnitOfMeasure="" NumSecondarySerials="" OrderingQuantityStrategy="" PricingQuantityConvFactor="" PricingQuantityStrategy="" PricingUOM="" PricingUOMStrategy="" PrimaryEnterpriseCode="" PrimarySupplier="" ProductLine="" RequiresProdAssociation="" ReturnWindow="" RunQuantity="" SerializedFlag="" ServiceTypeID="" ShipmentConsolidationWindow="" ShortDescription="" SizeCode="" Status="" TaxableFlag="" UnitCost="" UnitHeight="" UnitHeightUOM="" UnitLength="" UnitLengthUOM="" UnitVolume="" UnitVolumeUOM="" UnitWeight="" UnitWeightUOM="" UnitWidth="" UnitWidthUOM=""/>
+</Item>
+</Component>
+</Components>
+<InventoryTagAttributes BatchNo="" ItemKey="" ItemTagKey="" LotAttribute1="" LotAttribute2="" LotAttribute3="" LotKeyReference="" LotNumber="" ManufacturingDate="" RevisionNo=""/>
+<AlternateUOMList>
+<AlternateUOM Height="" HeightUOM="" IsOrderingUOM="" ItemKey="" ItemUOMKey="" Length="" LengthUOM="" Quantity="" UnitOfMeasure="" Weight="" WeightUOM="" Width="" WidthUOM=""/>
+</AlternateUOMList>
+<ItemInstructionList>
+<ItemInstruction InstructionCode="" InstructionText="" InstructionType="" ItemInstructionKey="" ItemKey="" SeqNo=""/>
+</ItemInstructionList>
+<ItemOptionList>
+<ItemOption ItemKey="" ItemOptionKey="" OptionItemId="" OptionUOM=""/>
+</ItemOptionList>
+<ItemServiceAssocList>
+<ItemServiceAssoc CategoryKey="" HoldSchedTillCompletion="" ItemKey="" ItemServiceAssocKey="" PricingProductQuantity="" PricingServiceQuantity="" ProductQuantity="" ServiceItemDesc="" ServiceItemGroupCode="" ServiceItemId="" ServiceQuantity="" ServiceUOM="" TimeOffsetInMinutes="">
+<ItemServiceAssocSkillList>
+<ItemServiceAssocSkill Description="" ServiceSkillId=""/>
+</ItemServiceAssocSkillList>
+</ItemServiceAssoc>
+</ItemServiceAssocList>
+<ServiceActivities>
+<ServiceActivity ActivityCode="" ActivitySeqNo="">
+<ServiceActivityInstructions>
+<ServiceActivityInstruction InstructionText="" InstructionURL="" SequenceNo="Required"/>
+</ServiceActivityInstructions>
+</ServiceActivity>
+</ServiceActivities>
+<CategoryList>
+<Category CategoryID="" CategoryKey="" CategoryPath="" OrganizationCode=""/>
+</CategoryList>
+<ChildItemList>
+<ChildItem ItemGroupCode="" ItemID="" ItemKey="" OrganizationCode="" UnitOfMeasure=""/>
+</ChildItemList>
+</Item>
+		</Template>
+	</API>
+</MultiApi>
