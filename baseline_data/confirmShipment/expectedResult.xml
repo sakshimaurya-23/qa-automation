@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MultiApi>
+    <API Name="getShipmentList">
+        <Output>
+            <ShipmentList>
+                <Shipment ShipmentNo="XXXX" EnterpriseCode="CT_Furniture_INC" ShipNode="XXXX" Status="Shipped">
+                    <ShipmentLines>
+                        <ShipmentLine ItemID="XXXX" Quantity="1" ProductClass="GOOD" UnitOfMeasure="EACH"/>
+                    </ShipmentLines>
+                </Shipment>
+            </ShipmentList>
+        </Output>
+    </API>
+</MultiApi>

@@ -1,0 +1,7 @@
+<MultiApi>
+	<API FlowName="CTSyncOrderAckOMSKibo">
+		<Input>
+			<Order DocumentType="${Order@DocumentType}" EnterpriseCode="${Order@EnterpriseCode}" OrderNo="${Order@OrderNo}" />
+		</Input>
+	</API>
+</MultiApi>

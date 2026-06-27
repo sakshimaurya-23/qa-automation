@@ -1,0 +1,11 @@
+<MultiApi>
+	<API Name="createShipment">
+		<Input>
+			<Shipment EnterpriseCode="CT_Furniture_INC" DocumentType="0001" ShipNode="${ShipNode_Extracted}" ShipmentNo="" OrderNo="${OrderNo}" ExpectedShipmentDate="" ExpectedDeliveryDate="" RequestedDeliveryDate="" CarrierServiceCode="">
+				<ShipmentLines>
+					<ShipmentLine ItemID="${ItemID}" ProductClass="GOOD" UnitOfMeasure="EACH" DocumentType="0001" OrderNo="${OrderNo}" PrimeLineNo="${PrimeLineNo_Extracted}" Quantity="1" ReleaseNo="${ReleaseNo_Extracted}" SubLineNo="1" />
+				</ShipmentLines>
+			</Shipment>
+		</Input>
+	</API>
+</MultiApi>

@@ -1,0 +1,13 @@
+This command will generate a requirements.txt file that lists all the libraries in your environment with their versions.
+pip freeze > requirements.txt
+
+To create their own virtual environment and install dependencies using the
+pip install -r requirements.txt command.
+
+allure report
+index.html
+<title>City Furniture OMS Automation Test Report</title>
+app.js
+replace >Allure< with >IBM<
+widgets - summary.json
+"reportName":"City Furniture OMS Automation Test Report"

@@ -1,0 +1,4 @@
+{
+    "getSupplyUrl": "/inventory/us-1b8d5331/v1/supplies?unitOfMeasure=EACH&productClass=GOOD&shipNode=CT_Furniture_INC&itemId=${RandomId}",
+    "_comment": "validatedata — GET supply to confirm inventory was seeded for itemId=${RandomId}"
+}

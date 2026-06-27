@@ -1,0 +1,20 @@
+<MultiApi>
+	<API FlowName="CTGetDeliveryOptionsForFulfillmentService">
+		<Input>
+			<Cart SellingChannel="" CartType="C" Node="49" SalesAssociateID="" ExtendedFinancePaymentCode="" FinanceTerms="" ZipCode="32958" OnlyPickup="">
+				<Discounts>
+					<Discount DiscountCode="" DiscountType="" DiscountMethod="" DiscountAmount=""/>
+					<Discount DiscountCode="" DiscountType="" DiscountMethod="" DiscountAmount=""/>
+				</Discounts>
+				<Items>
+					<Item LineID="1" ItemID="${RandomId}" ItemClass="18" ItemSubClass="" ItemSubGroup="" Segment="" SegmentType="" ProductClass="" Quantity="" Price="" PriceType="" IsOnSale="">
+						<Discounts>
+							<Discount DiscountCode="" DiscountType="" DiscountMethod="" DiscountAmount=""/>
+							<Discount DiscountCode="" DiscountType="" DiscountMethod="" DiscountAmount=""/>
+						</Discounts>
+					</Item>
+				</Items>
+			</Cart>
+		</Input>
+	</API>
+</MultiApi>

@@ -1,0 +1,24 @@
+<MultiApi>
+	<API Name="getATPForNearestStores">
+		<Input>
+			<Promise ShipNode="CT_Furniture_INC" />
+		</Input>
+		<Template>
+			<Promise>
+				<PromiseLines>
+					<PromiseLine>
+						<Availability>
+							<AvailableInventory>
+								<ShipNodeAvailableInventory>
+									<Inventory DistanceFromShipToAddress="" Node="CT_Furniture_INC">
+										<ShipNodePersonInfo AddressLine1="" City="" Country="" NodeType="" State="" ZipCode=""/>
+									</Inventory>
+								</ShipNodeAvailableInventory>
+							</AvailableInventory>
+						</Availability>
+					</PromiseLine>
+				</PromiseLines>
+			</Promise>
+		</Template>
+	</API>
+</MultiApi>

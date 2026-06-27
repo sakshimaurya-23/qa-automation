@@ -1,0 +1,7 @@
+<MultiApi>
+	<API FlowName="CTgetATPForNearestStoresService">
+		<Input>
+			<Promise ShipNode="CT_Furniture_INC"/>
+		</Input>
+	</API>
+</MultiApi>

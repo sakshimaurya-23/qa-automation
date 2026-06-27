@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MultiApi>
+    <API Name="">
+        <Output>
+            <Promise EnterpriseCode="CT_Furniture_INC" OrganizationCode="CT_Furniture_INC">
+                <PromiseLines>
+                    <PromiseLine ItemID="XXXX" LineId="1" ProductClass="GOOD" UnitOfMeasure="EACH">
+                        <Availability>
+                            <AvailableInventory AvailableOnhandQuantity="XXXX" AvailableQuantity="XXXX">
+                                <ShipNodeAvailableInventory>
+                                    <Inventory AvailableOnhandQuantity="XXXX" AvailableQuantity="XXXX" DistanceFromShipToAddress="" Node="XXXX">
+                                        <ShipNodePersonInfo>
+                                            <ShipNodePersonInfo AddressLine1="" City="" Country="" Latitude="" Longitude="" MobilePhone="" State="" ZipCode=""/>
+                                        </ShipNodePersonInfo>
+                                    </Inventory>
+                                </ShipNodeAvailableInventory>
+                            </AvailableInventory>
+                        </Availability>
+                    </PromiseLine>
+                </PromiseLines>
+            </Promise>
+        </Output>
+    </API>
+</MultiApi>

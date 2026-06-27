@@ -1,0 +1,7 @@
+<MultiApi>
+	<API FlowName="CTgetATPForNearestStoresService">
+		<Input>
+			<Promise ZipCode="${ZipCode}" ItemID="${RandomId}" LineId="1" ProductClass="GOOD" UnitOfMeasure="EACH" Latitude="" Longitude=""/>
+		</Input>
+	</API>
+</MultiApi>

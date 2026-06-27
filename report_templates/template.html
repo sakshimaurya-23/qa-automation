@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>City Furniture OMS Automation Test Report</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ibm-blue-60: #0f62fe;
+    --ibm-blue-70: #0043ce;
+    --ibm-blue-80: #002d9c;
+    --ibm-gray-10: #f4f4f4;
+    --ibm-gray-20: #e0e0e0;
+    --ibm-gray-30: #c6c6c6;
+    --ibm-gray-50: #8d8d8d;
+    --ibm-gray-70: #525252;
+    --ibm-gray-80: #393939;
+    --ibm-gray-90: #262626;
+    --ibm-gray-100: #161616;
+    --ibm-white: #ffffff;
+    --ibm-green-50: #24a148;
+    --ibm-green-60: #198038;
+    --ibm-red-50: #fa4d56;
+    --ibm-red-60: #da1e28;
+    --ibm-yellow-30: #f1c21b;
+    --ibm-yellow-40: #d2a106;
+  }
+
+  body {
+    font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+    background: var(--ibm-gray-10);
+    color: var(--ibm-gray-100);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* DARK MODE */
+  body.dark-mode { background: var(--ibm-gray-100); color: var(--ibm-gray-10); }
+  body.dark-mode .header { background: var(--ibm-gray-90); border-bottom-color: var(--ibm-gray-80); }
+  body.dark-mode .subheader { background: var(--ibm-gray-90); border-bottom-color: var(--ibm-gray-80); }
+  body.dark-mode .breadcrumb { color: var(--ibm-gray-30); }
+  body.dark-mode .breadcrumb a { color: var(--ibm-blue-60); }
+  body.dark-mode .hero-banner { background: var(--ibm-gray-90); }
+  body.dark-mode .tile { background: var(--ibm-gray-90); border-color: var(--ibm-gray-80); }
+  body.dark-mode .tile-header { border-bottom-color: var(--ibm-gray-80); }
+  body.dark-mode .tile-title { color: var(--ibm-gray-10); }
+  body.dark-mode thead { background: var(--ibm-gray-80); }
+  body.dark-mode thead th { color: var(--ibm-gray-30); border-bottom-color: var(--ibm-gray-70); }
+  body.dark-mode tbody tr { border-bottom-color: var(--ibm-gray-80); }
+  body.dark-mode tbody tr:hover { background: var(--ibm-gray-80); }
+  body.dark-mode tbody td { color: var(--ibm-gray-10); }
+  body.dark-mode .footer { background: var(--ibm-gray-90); border-top-color: var(--ibm-gray-80); }
+  body.dark-mode .btn-ghost { color: var(--ibm-gray-10); }
+  body.dark-mode .btn-ghost:hover { background: var(--ibm-gray-80); }
+
+  /* HEADER */
+  .header {
+    background: var(--ibm-white);
+    border-bottom: 1px solid var(--ibm-gray-20);
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .header-content { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1584px; margin: 0 auto; }
+  .header-brand { display: flex; align-items: center; gap: 16px; }
+  .header-logo { width: 32px; height: 32px; background: var(--ibm-blue-60); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: var(--ibm-white); }
+  .header-title { font-size: 14px; font-weight: 600; color: var(--ibm-gray-100); }
+  .header-actions { display: flex; align-items: center; gap: 8px; }
+
+  /* BUTTONS */
+  .btn { height: 32px; padding: 0 16px; border: none; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-primary { background: var(--ibm-blue-60); color: var(--ibm-white); }
+  .btn-primary:hover { background: var(--ibm-blue-70); }
+  .btn-ghost { background: transparent; color: var(--ibm-gray-100); }
+  .btn-ghost:hover { background: var(--ibm-gray-20); }
+
+  /* SUBHEADER */
+  .subheader { background: var(--ibm-white); border-bottom: 1px solid var(--ibm-gray-20); padding: 16px; }
+  .subheader-content { max-width: 1584px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  .breadcrumb { font-size: 14px; color: var(--ibm-gray-70); }
+  .breadcrumb a { color: var(--ibm-blue-60); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb-separator { margin: 0 8px; color: var(--ibm-gray-50); }
+
+  /* HERO BANNER */
+  .hero-banner { background: var(--ibm-white); padding: 32px 16px; border-bottom: 1px solid var(--ibm-gray-20); }
+  .hero-content { max-width: 1584px; margin: 0 auto; }
+  .hero-title { font-size: 32px; font-weight: 400; color: var(--ibm-gray-100); margin-bottom: 8px; }
+  .hero-meta { font-size: 14px; color: var(--ibm-gray-70); margin-bottom: 16px; }
+  .hero-meta span { margin-right: 24px; }
+  .tag { display: inline-flex; align-items: center; height: 24px; padding: 0 8px; font-size: 12px; font-weight: 600; border-radius: 2px; color: var(--ibm-white); }
+
+  /* MAIN CONTENT */
+  .content { max-width: 1584px; margin: 0 auto; padding: 32px 16px; }
+
+  /* GRID */
+  .grid { display: grid; gap: 16px; margin-bottom: 32px; }
+  .grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .grid-2 { grid-template-columns: 1fr 380px; }
+  @media (max-width: 1056px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  /* TILE */
+  .tile { background: var(--ibm-white); border: 1px solid var(--ibm-gray-20); padding: 16px; }
+  .tile-header { border-bottom: 1px solid var(--ibm-gray-20); padding-bottom: 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; }
+  .tile-title { font-size: 14px; font-weight: 600; color: var(--ibm-gray-100); }
+  .tile-subtitle { font-size: 12px; color: var(--ibm-gray-70); }
+
+  /* KPI CARD */
+  .kpi-card { display: flex; flex-direction: column; gap: 8px; }
+  .kpi-value { font-size: 48px; font-weight: 300; line-height: 1; }
+  .kpi-value.total { color: var(--ibm-blue-60); }
+  .kpi-value.pass { color: var(--ibm-green-60); }
+  .kpi-value.fail { color: var(--ibm-red-60); }
+  .kpi-value.skip { color: var(--ibm-yellow-40); }
+  .kpi-label { font-size: 14px; color: var(--ibm-gray-70); }
+
+  /* TABLE */
+  .table-container { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  thead { background: var(--ibm-gray-10); }
+  thead th { padding: 12px 16px; text-align: left; font-weight: 600; color: var(--ibm-gray-100); border-bottom: 1px solid var(--ibm-gray-30); }
+  tbody tr { border-bottom: 1px solid var(--ibm-gray-20); }
+  tbody tr:hover { background: var(--ibm-gray-10); }
+  tbody td { padding: 12px 16px; color: var(--ibm-gray-100); }
+  .cell-primary { font-weight: 600; }
+  .cell-secondary { font-size: 12px; color: var(--ibm-gray-70); margin-top: 4px; }
+  .cell-mono { font-family: monospace; font-size: 12px; }
+
+  /* STATUS BADGE */
+  .status-badge { display: inline-flex; align-items: center; height: 24px; padding: 0 8px; font-size: 12px; font-weight: 600; border-radius: 2px; }
+  .status-badge.fail { background: var(--ibm-red-60); color: var(--ibm-white); }
+  .status-badge.pass { background: var(--ibm-green-60); color: var(--ibm-white); }
+  .status-badge.skip { background: var(--ibm-yellow-30); color: var(--ibm-gray-100); }
+
+  /* PROGRESS BAR */
+  .progress-section { margin-bottom: 24px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--ibm-gray-70); margin-bottom: 8px; }
+  .progress-bar { height: 8px; background: var(--ibm-gray-20); display: flex; overflow: hidden; }
+  .progress-segment { height: 100%; }
+  .progress-segment.pass { background: var(--ibm-green-60); }
+  .progress-segment.fail { background: var(--ibm-red-60); }
+  .progress-segment.skip { background: var(--ibm-yellow-30); }
+  .progress-legend { display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ibm-gray-70); }
+  .legend-color { width: 12px; height: 12px; }
+
+  /* SUMMARY LIST */
+  .summary-list { display: flex; flex-direction: column; gap: 16px; }
+  .summary-item { display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+  .summary-key { color: var(--ibm-gray-70); }
+  .summary-value { font-weight: 600; color: var(--ibm-gray-100); }
+  .summary-value.pass { color: var(--ibm-green-60); }
+  .summary-value.fail { color: var(--ibm-red-60); }
+
+  /* FOOTER */
+  .footer { background: var(--ibm-white); border-top: 1px solid var(--ibm-gray-20); padding: 16px; margin-top: 64px; }
+  .footer-content { max-width: 1584px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--ibm-gray-70); }
+
+  /* PRINT */
+  @media print { .btn, .header-actions { display: none !important; } body { background: white !important; } .tile { break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-content">
+    <div class="header-brand">
+      <div class="header-logo">RF</div>
+      <div class="header-title">City Furniture OMS Automation Platform</div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-ghost" onclick="toggleTheme()" title="Toggle theme">
+        <span id="theme-icon">🌙</span>
+      </button>
+      <button class="btn btn-ghost" onclick="window.print()">
+        &#8595; Export PDF
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- SUBHEADER -->
+<div class="subheader">
+  <div class="subheader-content">
+    <div class="breadcrumb">
+      <a href="#">Test_Cases</a><span class="breadcrumb-separator">/</span>
+      <a href="#">{{TC_ID}}</a><span class="breadcrumb-separator">/</span>
+      <span>Test.robot</span>
+    </div>
+  </div>
+</div>
+
+<!-- HERO BANNER -->
+<div class="hero-banner">
+  <div class="hero-content">
+    <h1 class="hero-title">{{TC_ID}} &middot; Test Execution Report</h1>
+    <div class="hero-meta">
+      <span>Suite: {{SUITE_NAME}}</span>
+      <span>Duration: {{SUITE_DURATION}}</span>
+      <span>Generated: {{GENERATED_TIME}}</span>
+    </div>
+    <span class="tag" style="background:{{STATUS_COLOR}};">{{OVERALL_STATUS}}</span>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+
+  <!-- KPI CARDS -->
+  <div class="grid grid-4">
+    <div class="tile">
+      <div class="kpi-card">
+        <div class="kpi-value total">{{TOTAL}}</div>
+        <div class="kpi-label">Total Tests</div>
+      </div>
+    </div>
+    <div class="tile">
+      <div class="kpi-card">
+        <div class="kpi-value pass">{{PASS}}</div>
+        <div class="kpi-label">Passed</div>
+      </div>
+    </div>
+    <div class="tile">
+      <div class="kpi-card">
+        <div class="kpi-value fail">{{FAIL}}</div>
+        <div class="kpi-label">Failed</div>
+      </div>
+    </div>
+    <div class="tile">
+      <div class="kpi-card">
+        <div class="kpi-value skip">{{SKIP}}</div>
+        <div class="kpi-label">Skipped</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TWO COLUMN LAYOUT -->
+  <div class="grid grid-2">
+
+    <!-- LEFT COLUMN -->
+    <div>
+
+      <!-- SUITE STATISTICS -->
+      <div class="tile" style="margin-bottom:16px;">
+        <div class="tile-header">
+          <div class="tile-title">Suite Statistics</div>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Suite Name</th>
+                <th>Total</th>
+                <th>Pass</th>
+                <th>Fail</th>
+                <th>Skip</th>
+                <th>Elapsed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="cell-primary">{{SUITE_NAME}}</div>
+                  <div class="cell-secondary">{{SUITE_SOURCE}}</div>
+                </td>
+                <td>{{TOTAL}}</td>
+                <td style="color:var(--ibm-green-60);font-weight:600;">{{PASS}}</td>
+                <td style="color:var(--ibm-red-60);font-weight:600;">{{FAIL}}</td>
+                <td style="color:var(--ibm-yellow-40);font-weight:600;">{{SKIP}}</td>
+                <td><span class="cell-mono">{{SUITE_DURATION}}</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TEST DETAILS -->
+      <div class="tile">
+        <div class="tile-header">
+          <div class="tile-title">Test Details</div>
+          <div class="tile-subtitle">{{TOTAL}} test(s)</div>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Test Name</th>
+                <th>Status</th>
+                <th>Start Time</th>
+                <th>Duration</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{TEST_ROWS}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div>
+
+      <!-- PASS RATE -->
+      <div class="tile" style="margin-bottom:16px;">
+        <div class="tile-header">
+          <div class="tile-title">Pass Rate</div>
+        </div>
+        <div class="progress-section">
+          <div class="progress-label">
+            <span>Overall</span>
+            <span>{{PASS}} / {{TOTAL}}</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-segment pass" style="width:{{PASS_PCT}}%"></div>
+            <div class="progress-segment fail" style="width:{{FAIL_PCT}}%"></div>
+            <div class="progress-segment skip" style="width:{{SKIP_PCT}}%"></div>
+          </div>
+          <div class="progress-legend">
+            <div class="legend-item">
+              <div class="legend-color" style="background:var(--ibm-green-60);"></div>
+              <span>Pass: {{PASS_PCT}}%</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background:var(--ibm-red-60);"></div>
+              <span>Fail: {{FAIL_PCT}}%</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background:var(--ibm-yellow-30);"></div>
+              <span>Skip: {{SKIP_PCT}}%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXECUTION SUMMARY -->
+      <div class="tile">
+        <div class="tile-header">
+          <div class="tile-title">Execution Summary</div>
+        </div>
+        <div class="summary-list">
+          <div class="summary-item">
+            <span class="summary-key">Suite</span>
+            <span class="summary-value">{{SUITE_NAME}}</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-key">Total Tests</span>
+            <span class="summary-value">{{TOTAL}}</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-key">Passed</span>
+            <span class="summary-value pass">{{PASS}}</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-key">Failed</span>
+            <span class="summary-value fail">{{FAIL}}</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-key">Skipped</span>
+            <span class="summary-value">{{SKIP}}</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-key">Duration</span>
+            <span class="summary-value">{{SUITE_DURATION}}</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-key">Generated</span>
+            <span class="summary-value">{{GENERATED_TIME}}</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-content">
+    <span>City Furniture OMS Automation Platform &middot; Robot Framework</span>
+    <span>Generated {{GENERATED_TIME}}</span>
+  </div>
+</footer>
+
+<script>
+  function toggleTheme() {
+    const body = document.body;
+    const icon = document.getElementById('theme-icon');
+    const dark = body.classList.toggle('dark-mode');
+    icon.textContent = dark ? '☀️' : '🌙';
+    localStorage.setItem('darkMode', dark ? 'enabled' : 'disabled');
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      document.body.classList.add('dark-mode');
+      document.getElementById('theme-icon').textContent = '☀️';
+    }
+  });
+</script>
+
+</body>
+</html>
+<!-- Made with IBM Bob -->

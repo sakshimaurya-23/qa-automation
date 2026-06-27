@@ -1,0 +1,18 @@
+<MultiApi>
+	<API Name="getDeliveryOptionsResult">
+		<Input>
+			<Cart ItemID="${RandomId}" ZipCode="" />
+		</Input>
+		<Template>
+			<Cart CartType="" Node="" ZipCode="">
+				<Items>
+					<Item ItemID="${RandomId}" LineID="">
+						<FulfillmentOptions>
+							<FulfillmentOption FulfillmentCode="" FulfillmentType="" ServiceArea="" ServiceTime="" ServiceType=""/>
+						</FulfillmentOptions>
+					</Item>
+				</Items>
+			</Cart>
+		</Template>
+	</API>
+</MultiApi>

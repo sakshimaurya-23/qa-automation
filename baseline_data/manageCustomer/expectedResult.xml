@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MultiApi>
+    <API Name="getCustomerList">
+        <Output>
+            <CustomerList>
+                <Customer CustomerID="XXXX" CustomerKey="XXXX" CustomerType="02" OrganizationCode="CT_Furniture_INC">
+                    <CustomerContactList>
+                        <CustomerContact EmailID="" FirstName="" LastName="" MobilePhone="">
+                            <CustomerAdditionalAddressList>
+                                <CustomerAdditionalAddress IsBillTo="Y" IsDefaultBillTo="Y" IsDefaultShipTo="Y" IsShipTo="Y">
+                                    <PersonInfo AddressLine1="" City="" Country="" EMailID="" FirstName="" LastName="" MobilePhone="" State="" ZipCode=""/>
+                                </CustomerAdditionalAddress>
+                            </CustomerAdditionalAddressList>
+                        </CustomerContact>
+                    </CustomerContactList>
+                </Customer>
+            </CustomerList>
+        </Output>
+    </API>
+</MultiApi>

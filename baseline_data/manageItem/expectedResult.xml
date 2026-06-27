@@ -1,0 +1,11 @@
+<MultiApi>
+    <API Name="getItemList">
+        <Output>
+            <ItemList>
+                <Item ItemID="${RandomId}" OrganizationCode="CT_Furniture_INC" UnitOfMeasure="EACH">
+                    <InventoryParameters ATPRule=""/>
+                </Item>
+            </ItemList>
+        </Output>
+    </API>
+</MultiApi>

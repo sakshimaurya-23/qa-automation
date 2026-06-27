@@ -1,0 +1,17 @@
+<MultiApi>
+	<API Name="getOrderDetails">
+		<Input>
+			<Order DocumentType="0001" EnterpriseCode="CT_Furniture_INC" OrderNo="${OrderNo}" />
+		</Input>
+		<Template>
+			<Order OrderHeaderKey="" MaxOrderStatus="" Status="">
+				<OrderStatuses>
+					<OrderStatus OrderReleaseKey="" OrderLineKey=""/>
+				</OrderStatuses>
+				<OrderLines>
+					<OrderLine OrderLineKey="" OrderedQty=""/>
+				</OrderLines>
+			</Order>
+		</Template>
+	</API>
+</MultiApi>

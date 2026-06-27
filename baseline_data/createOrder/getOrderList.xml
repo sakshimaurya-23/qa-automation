@@ -1,0 +1,18 @@
+<MultiApi>
+	<API Name="getOrderList">
+		<Input>
+			<Order OrderNo="${RandomId}" DocumentType="" OrganizationCode="" />
+		</Input>
+		<Template>
+			<OrderList>
+				<Order OrderNo="${RandomId}" OrganizationCode="" UnitOfMeasure="" MinOrderStatus="">
+				<OrderLines>
+				<OrderLine OrderedQty="1" >
+					<ItemDetails ItemID="${RandomId}" />
+				</OrderLine>
+				</OrderLines>
+				</Order>
+			</OrderList>
+		</Template>
+	</API>
+</MultiApi>

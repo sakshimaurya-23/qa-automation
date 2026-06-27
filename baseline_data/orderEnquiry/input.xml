@@ -1,0 +1,9 @@
+<MultiApi>
+	<API FlowName="CTGetOrderListSyncService">
+		<Input>
+			<Order OrderNo="${OrderNo}" fromOrderDate="" toOrderDate="" DocumentType="0001" EnterpriseCode="" CustomerEMailID="" BillToID="" SellerOrganizationCode="" CustomerFirstName="" CustomerLastName="" CustomerPhoneNo="" onlyOpenDocuments="" excludeCancelled="" MaximumRecords="">
+				<Extn ExtnHasPaymentAppDocuments="" ExtnLegacyDocumentID=""/>
+			</Order>
+		</Input>
+	</API>
+</MultiApi>

@@ -1,0 +1,9 @@
+<MultiApi>
+	<API Name="confirmShipment">
+		<Input>
+			<Shipment ShipComplete="Y" IgnoreOrdering="Y" ShipNode="${ShipNode_Extracted}" SellerOrganizationCode="CT_Furniture_INC" ShipmentNo="${ShipmentNo_Extracted}" EnterpriseCode="CT_Furniture_INC" OverrideModificationRules="Y">
+				<ToAddress AddressLine1="" AddressLine2="" City="" Country="US" EMailID="" FirstName="" LastName="" MobilePhone="" State="" ZipCode=""/>
+			</Shipment>
+		</Input>
+	</API>
+</MultiApi>

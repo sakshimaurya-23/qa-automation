@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MultiApi>
+    <API Name="getOrderReleaseList">
+        <Output>
+            <OrderReleaseList TotalOrderReleaseList="1">
+                <OrderRelease OrderReleaseKey="XXXX" DocumentType="0001" EnterpriseCode="CT_Furniture_INC" ShipNode="XXXX" CarrierServiceCode=""/>
+            </OrderReleaseList>
+        </Output>
+    </API>
+</MultiApi>

@@ -1,0 +1,16 @@
+<MultiApi>
+	<API Name="getOrderList">
+		<Input>
+			<Order OrderNo="${OrderNo}" DocumentType="0001" EnterpriseCode="" />
+		</Input>
+		<Template>
+			<OrderList>
+				<Order OrderNo="${OrderNo}" MaxOrderStatus="" Status="">
+					<OrderLines>
+						<OrderLine OrderLineKey="" OrderedQty=""/>
+					</OrderLines>
+				</Order>
+			</OrderList>
+		</Template>
+	</API>
+</MultiApi>

@@ -1,0 +1,16 @@
+<MultiApi>
+	<API Name="getShipmentList">
+		<Input>
+			<Shipment ShipmentNo="${ShipmentNo_Extracted}" EnterpriseCode="CT_Furniture_INC" />
+		</Input>
+		<Template>
+			<ShipmentList>
+				<Shipment ShipmentNo="${ShipmentNo_Extracted}" EnterpriseCode="" ShipNode="" Status="">
+					<ShipmentLines>
+						<ShipmentLine ItemID="${RandomId}" Quantity="" ProductClass="" UnitOfMeasure=""/>
+					</ShipmentLines>
+				</Shipment>
+			</ShipmentList>
+		</Template>
+	</API>
+</MultiApi>

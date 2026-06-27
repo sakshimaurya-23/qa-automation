@@ -1,0 +1,23 @@
+<MultiApi>
+	<API Name="createOrder">
+		<Input>
+			<Order BuyerOrganizationCode="CT_Furniture_INC" DocumentType="0001" EnterpriseCode="CT_Furniture_INC" OrderDate="2026-05-08T10:00:00+10:00" OrderNo="" OrderType="" PaymentStatus="PAID">
+				<OrderLines>
+					<OrderLine DisableBundleLookup="Y" DeliveryMethod="SHP" IsProcurementAllowed="Y" ItemGroupCode="PROD" OrderedQty="1.00" PrimeLineNo="1" SubLineNo="1" ShipNode="71" IsFirmPredefinedNode="Y" ReqDeliveryDate="2026-05-28T10:00:00+10:00">
+						<Item CostCurrency="USD" ItemDesc="" ItemID="${RandomId}" ProductClass="GOOD" UnitOfMeasure="EACH"/>
+						<Extn ExtnElevatorReservationFlag="" ExtnWaveId="123" ExtnAppointmentId="13"/>
+						<LinePriceInfo UnitPrice="1200" RetailPrice="2000"/>
+					</OrderLine>
+				</OrderLines>
+				<PersonInfoBillTo AddressLine1="vj AISH OFFICE" AddressLine2="3RD FLOOR, 4810 50 STREET" City="vj" EMailID="" FirstName="vj" LastName="vj FROM PROVINCE A" MobilePhone="" State="MA" ZipCode="32948" Country="US"/>
+				<PaymentMethods>
+					<PaymentMethod PaymentType="Cash" UnlimitedCharges="N" PaymentReference1="TEST_PAYMENT_SR003">
+						<PaymentDetailsList>
+							<PaymentDetails ChargeType="CHARGE" ProcessedAmount="6840.00" RequestAmount="6840.00"/>
+						</PaymentDetailsList>
+					</PaymentMethod>
+				</PaymentMethods>
+			</Order>
+		</Input>
+	</API>
+</MultiApi>

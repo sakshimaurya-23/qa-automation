@@ -1,0 +1,22 @@
+<MultiApi>
+	<API Name="getCustomerList">
+		<Input>
+			<CTSearchCustomerWrapperSyncService OrganizationCode="CT_Furniture_INC" SearchString="${RandomId}"/>
+		</Input>
+		<Template>
+			<CustomerList>
+				<Customer CustomerID="" CustomerKey="" CustomerType="" OrganizationCode="">
+					<CustomerContactList>
+						<CustomerContact EmailID="" FirstName="" LastName="" MobilePhone="">
+							<CustomerAdditionalAddressList>
+								<CustomerAdditionalAddress AddressType="" IsBillTo="" IsDefaultBillTo="" IsDefaultShipTo="" IsShipTo="">
+									<PersonInfo AddressLine1="" City="" Country="" EMailID="" FirstName="" LastName="" MobilePhone="" State="" ZipCode=""/>
+								</CustomerAdditionalAddress>
+							</CustomerAdditionalAddressList>
+						</CustomerContact>
+					</CustomerContactList>
+				</Customer>
+			</CustomerList>
+		</Template>
+	</API>
+</MultiApi>

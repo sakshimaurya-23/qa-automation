@@ -1,0 +1,25 @@
+<MultiApi>
+	<API Name="createOrder">
+		<Input>
+			<Order BuyerOrganizationCode="CT_Furniture_INC" DocumentType="0001" EnterpriseCode="CT_Furniture_INC" OrderDate="2026-04-23T10:00:00+10:00" OrderNo="" OrderType="" PaymentStatus="PAID" EnteredBy="CT_Furniture_OMS" OrderPurpose="REFUND" ExchangeType="REGULAR">
+				<Extn ExtnStoreFront="DC" ExtnhasDeliveryRestriction="N"/>
+				<OrderLines>
+					<OrderLine DisableBundleLookup="Y" DeliveryMethod="SHP" IsProcurementAllowed="Y" ItemGroupCode="PROD" OrderedQty="1.00" PrimeLineNo="1" SubLineNo="1" ShipNode="4" IsFirmPredefinedNode="Y" ReqDeliveryDate="2026-05-07T10:00:00+10:00">
+						<Item CostCurrency="USD" ItemDesc="" ItemID="${RandomId}" ProductClass="GOOD" UnitOfMeasure="EACH"/>
+						<Extn ExtnServiceCarrier="J" ExtnDeliveryType="M" ExtnWaveId="WAVEN7_SR002" ExtnPrimaryDC="4" ExtnStoreFront=""/>
+						<LinePriceInfo UnitPrice="1200" RetailPrice="2000"/>
+					</OrderLine>
+				</OrderLines>
+				<PersonInfoBillTo AddressLine1="vj AISH OFFICE" AddressLine2="3RD FLOOR, 4810 50 STREET" City="vj" EMailID="" FirstName="vj" LastName="vj FROM PROVINCE A" MobilePhone="" State="MA" ZipCode="32948" Country="US"/>
+				<PersonInfoShipTo AddressLine1="vj AISH OFFICE" AddressLine2="3RD FLOOR, 4810 50 STREET" City="vj" EMailID="hynagmail.com" FirstName="vj" LastName="vj FROM PROVINCE A" MobilePhone="8999899991" State="MA" ZipCode="519896" Country="US"/>
+				<PaymentMethods>
+					<PaymentMethod PaymentType="Cash" UnlimitedCharges="N" PaymentReference1="TEST_PAYMENT_SR003">
+						<PaymentDetailsList>
+							<PaymentDetails ChargeType="CHARGE" ProcessedAmount="6840.00" RequestAmount="6840.00"/>
+						</PaymentDetailsList>
+					</PaymentMethod>
+				</PaymentMethods>
+			</Order>
+		</Input>
+	</API>
+</MultiApi>

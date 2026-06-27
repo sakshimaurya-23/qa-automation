@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MultiApi>
+    <API Name="">
+        <Output>
+            <Cart CartType="C" Node="49" ZipCode="32958">
+                <Items>
+                    <Item ItemID="XXXX" LineID="1" ItemClass="18">
+                        <FulfillmentOptions>
+                            <FulfillmentOption FulfillmentCode="XXXX" FulfillmentType="Pickup" ServiceArea="DC" ServiceTime="Regular" ServiceType="Threshold"/>
+                        </FulfillmentOptions>
+                    </Item>
+                </Items>
+            </Cart>
+        </Output>
+    </API>
+</MultiApi>

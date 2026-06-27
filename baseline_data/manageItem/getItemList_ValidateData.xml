@@ -1,0 +1,14 @@
+<MultiApi>
+	<API Name="getItemList">
+		<Input>
+			<Item ItemID="${RandomId}"/>
+		</Input>
+		<Template>
+			<ItemList>
+				<Item ItemID="${RandomId}" OrganizationCode="" UnitOfMeasure="">
+				<InventoryParameters ATPRule="" />
+				</Item>
+			</ItemList>
+		</Template>
+	</API>
+</MultiApi>

@@ -1,0 +1,13 @@
+{
+    "supplies": [
+        {
+            "itemId": "${RandomId}",
+            "unitOfMeasure": "EACH",
+            "productClass": "GOOD",
+            "shipNode": "CT_Furniture_INC",
+            "type": "ONHAND",
+            "changedQuantity": 10,
+            "adjustmentReason": "ABSOLUTE"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MultiApi>
+    <API Name="getOrderList">
+        <Output>
+            <OrderList>
+                <Order OrderNo="XXXX" MaxOrderStatus="1100" Status="Scheduled">
+                    <OrderLines>
+                        <OrderLine OrderLineKey="XXXX" OrderedQty="1.00"/>
+                    </OrderLines>
+                </Order>
+            </OrderList>
+        </Output>
+    </API>
+</MultiApi>

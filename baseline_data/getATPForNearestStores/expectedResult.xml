@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MultiApi>
+    <API Name="getATPForNearestStores">
+        <Output>
+            <Promise>
+                <PromiseLines>
+                    <PromiseLine>
+                        <Availability>
+                            <AvailableInventory>
+                                <ShipNodeAvailableInventory>
+                                    <Inventory DistanceFromShipToAddress="" Node="XXXX">
+                                        <ShipNodePersonInfo AddressLine1="" City="" Country="" NodeType="DC" State="" ZipCode=""/>
+                                    </Inventory>
+                                </ShipNodeAvailableInventory>
+                            </AvailableInventory>
+                        </Availability>
+                    </PromiseLine>
+                </PromiseLines>
+            </Promise>
+        </Output>
+    </API>
+</MultiApi>
