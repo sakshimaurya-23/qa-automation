@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 """
 Generate Custom HTML Report from Robot Framework output.xml
