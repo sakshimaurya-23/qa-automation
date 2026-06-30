@@ -67,62 +67,127 @@ Process All JSON Files
     ${json_path}    Set Variable    ${SUITE_PATH}/Data/updated_files.json
     ${json_string}    Get File    ${json_path}
     ${data}    Convert String To JSON    ${json_string}
-    FOR    ${test_case}    IN    @{data.keys()}
-        ${xml_files}=    Get From Dictionary    ${data}    ${test_case}
-        FOR    ${xml_file}    IN    @{xml_files}
-            ${xml_content}=    Get File    ${xml_file}
-            # Fix 1: Extract OrderNo/OrderHeaderKey from any _input.xml response that contains OrderNo=
-            ${matchInputXML}=    Run Keyword And Return Status    Should Match Regexp    ${xml_file}    (?i)_input\.xml$
-            IF    ${matchInputXML}
-                ${alreadyHasOrderNo}=    Run Keyword And Return Status    Variable Should Exist    \${OrderNo}
-                IF    not ${alreadyHasOrderNo}
-                    # Send the request first WITHOUT substitution to get the response and extract OrderNo
-                    ${temp_resp}=    Send XML File    ${xml_content}    ${xml_file}    ${index}
-                    ${hasOrderInResp}=    Run Keyword And Return Status    Should Contain    ${temp_resp.text}    OrderNo=
-                    IF    ${hasOrderInResp}
-                        Extract Order Info    ${temp_resp.text}
-                        # Now substitute with the newly extracted OrderNo for subsequent uses
-                        ${xml_content}=    Substitute Extracted Variables    ${xml_content}
-                        ${resp}=    Send XML File    ${xml_content}    ${xml_file}    ${index}
-                    ELSE
-                        # No OrderNo in response, just use the original response
-                        ${resp}=    Set Variable    ${temp_resp}
-                    END
-                ELSE
-                    # OrderNo already exists, substitute and send
+    ${file_groups}=    Get From Dictionary    ${data}    Data
+
+    # === Process Setup files first (with error checking) ===
+    ${setup_groups}=    Get From Dictionary    ${file_groups}    setup
+    ${setup_xml_files}=    Get From Dictionary    ${setup_groups}    xml_files
+    ${setup_json_files}=    Get From Dictionary    ${setup_groups}    json_files
+
+    # Process Setup XML files (OMS MultiApi endpoint)
+    FOR    ${xml_file}    IN    @{setup_xml_files}
+        Log To Console    Processing Setup XML file: ${xml_file}
+        ${xml_content}=    Get File    ${xml_file}
+        ${xml_content}=    Substitute Extracted Variables    ${xml_content}
+        ${resp}=    Send XML File    ${xml_content}    ${xml_file}    ${index}
+        # Error check for Setup files
+        ${has_error}=    Run Keyword And Return Status    Should Contain    ${resp.text}    <Errors>
+        IF    ${has_error}
+            Log To Console    SETUP FAILED: ${xml_file} returned errors
+            Log To Console    ${resp.text}
+            Fail    Setup API failed — cannot proceed. Check ${xml_file} response above.
+        END
+    END
+
+    # Process Setup JSON files (IV REST endpoint)
+    FOR    ${json_file}    IN    @{setup_json_files}
+        Log To Console    Processing Setup JSON file: ${json_file}
+        ${json_content}=    Get File    ${json_file}
+        ${resp}=    Create IV Post Session    ${SUITE_PATH}    iv_session    /inventory/us-1b8d5331/v1/supplies    ${json_file}
+        # Error check for Setup files
+        ${has_error}=    Run Keyword And Return Status    Should Contain    ${resp.text}    <Errors>
+        IF    ${has_error}
+            Log To Console    SETUP FAILED: ${json_file} returned errors
+            Log To Console    ${resp.text}
+            Fail    Setup API failed — cannot proceed. Check ${json_file} response above.
+        END
+    END
+
+    # === Process Input files (with extraction logic) ===
+    ${input_groups}=    Get From Dictionary    ${file_groups}    input
+    ${input_xml_files}=    Get From Dictionary    ${input_groups}    xml_files
+    ${input_json_files}=    Get From Dictionary    ${input_groups}    json_files
+
+    FOR    ${xml_file}    IN    @{input_xml_files}
+        ${xml_content}=    Get File    ${xml_file}
+        # Fix 1: Extract OrderNo/OrderHeaderKey from any _input.xml response that contains OrderNo=
+        ${matchInputXML}=    Run Keyword And Return Status    Should Match Regexp    ${xml_file}    (?i)_input\.xml$
+        IF    ${matchInputXML}
+            ${alreadyHasOrderNo}=    Run Keyword And Return Status    Variable Should Exist    \${OrderNo}
+            IF    not ${alreadyHasOrderNo}
+                # Send the request first WITHOUT substitution to get the response and extract OrderNo
+                ${temp_resp}=    Send XML File    ${xml_content}    ${xml_file}    ${index}
+                ${hasOrderInResp}=    Run Keyword And Return Status    Should Contain    ${temp_resp.text}    OrderNo=
+                IF    ${hasOrderInResp}
+                    Extract Order Info    ${temp_resp.text}
+                    # Now substitute with the newly extracted OrderNo for subsequent uses
                     ${xml_content}=    Substitute Extracted Variables    ${xml_content}
                     ${resp}=    Send XML File    ${xml_content}    ${xml_file}    ${index}
+                ELSE
+                    # No OrderNo in response, just use the original response
+                    ${resp}=    Set Variable    ${temp_resp}
                 END
             ELSE
-                # Not an _input.xml file, just substitute and send
+                # OrderNo already exists, substitute and send
                 ${xml_content}=    Substitute Extracted Variables    ${xml_content}
                 ${resp}=    Send XML File    ${xml_content}    ${xml_file}    ${index}
             END
-            # Fix 9: Extract ShipmentNo/ShipNode/OrderLineKey/OrderReleaseKey from any _input.xml
-            # response that contains ShipmentNo= (replaces filename-based createShipment check)
-            ${matchInputXML2}=    Run Keyword And Return Status    Should Match Regexp    ${xml_file}    (?i)_input\.xml$
-            IF    ${matchInputXML2}
-                ${hasShipment}=    Run Keyword And Return Status    Should Contain    ${resp.text}    ShipmentNo=
-                IF    ${hasShipment}
-                    ${alreadyHasShipmentNo}=    Run Keyword And Return Status    Variable Should Exist    \${ShipmentNo_Extracted}
-                    IF    not ${alreadyHasShipmentNo}
-                        Extract Shipment Info    ${resp}
-                    END
+        ELSE
+            # Not an _input.xml file, just substitute and send
+            ${xml_content}=    Substitute Extracted Variables    ${xml_content}
+            ${resp}=    Send XML File    ${xml_content}    ${xml_file}    ${index}
+        END
+        # Fix 9: Extract ShipmentNo/ShipNode/OrderLineKey/OrderReleaseKey from any _input.xml
+        # response that contains ShipmentNo= (replaces filename-based createShipment check)
+        ${matchInputXML2}=    Run Keyword And Return Status    Should Match Regexp    ${xml_file}    (?i)_input\.xml$
+        IF    ${matchInputXML2}
+            ${hasShipment}=    Run Keyword And Return Status    Should Contain    ${resp.text}    ShipmentNo=
+            IF    ${hasShipment}
+                ${alreadyHasShipmentNo}=    Run Keyword And Return Status    Variable Should Exist    \${ShipmentNo_Extracted}
+                IF    not ${alreadyHasShipmentNo}
+                    Extract Shipment Info    ${resp}
                 END
             END
-            # Fix 10: Extract OrderLineKey+ShipNode from any _input.xml response that contains OrderLineKey=
-            ${matchInputXML3}=    Run Keyword And Return Status    Should Match Regexp    ${xml_file}    (?i)_input\.xml$
-            IF    ${matchInputXML3}
-                ${hasOrderLineKey}=    Run Keyword And Return Status    Should Contain    ${resp.text}    OrderLineKey=
-                IF    ${hasOrderLineKey}
-                    ${alreadyHasOrderLineKey}=    Run Keyword And Return Status    Variable Should Exist    \${OrderLineKey_Extracted}
-                    IF    not ${alreadyHasOrderLineKey}
-                        Extract Order Line Key    ${resp.text}
-                    END
+        END
+        # Fix 10: Extract OrderLineKey+ShipNode from any _input.xml response that contains OrderLineKey=
+        ${matchInputXML3}=    Run Keyword And Return Status    Should Match Regexp    ${xml_file}    (?i)_input\.xml$
+        IF    ${matchInputXML3}
+            ${hasOrderLineKey}=    Run Keyword And Return Status    Should Contain    ${resp.text}    OrderLineKey=
+            IF    ${hasOrderLineKey}
+                ${alreadyHasOrderLineKey}=    Run Keyword And Return Status    Variable Should Exist    \${OrderLineKey_Extracted}
+                IF    not ${alreadyHasOrderLineKey}
+                    Extract Order Line Key    ${resp.text}
+                END
+            END
+        END
+        # Fix 11: releaseOrder returns <Output/> on success — IBM Sterling OMS does not echo
+        # back release data synchronously.  Detect this case and fetch the released order
+        # details via getOrderDetails so that ShipNode, OrderLineKey, ReleaseNo, PrimeLineNo
+        # and OrderReleaseKey are available for every downstream step.
+        # We only do this when:
+        #   (a) the file name contains "releaseorder" (case-insensitive)
+        #   (b) the response is <Output/> (no OrderLineKey was set by Fix 10)
+        #   (c) ${OrderNo} is already known (createOrder ran earlier in this suite)
+        ${isReleaseOrderFile}=    Run Keyword And Return Status    Should Match Regexp    ${xml_file}    (?i)releaseOrder
+        IF    ${isReleaseOrderFile}
+            ${hasEmptyOutput}=    Run Keyword And Return Status    Should Contain    ${resp.text}    <Output/>
+            IF    ${hasEmptyOutput}
+                ${hasOrderNo}=    Run Keyword And Return Status    Variable Should Exist    \${OrderNo}
+                IF    ${hasOrderNo}
+                    Log To Console    INFO: releaseOrder returned <Output/> — fetching ShipNode/OrderLineKey from getOrderDetails
+                    Extract Release Info From Get Order Details    ${SUITE_PATH}
                 END
             END
         END
     END
+
+    # Process Input JSON files (IV REST endpoint)
+    FOR    ${json_file}    IN    @{input_json_files}
+        Log To Console    Processing Input JSON file: ${json_file}
+        ${json_content}=    Get File    ${json_file}
+        ${resp}=    Create IV Post Session    ${SUITE_PATH}    iv_session    /inventory/us-1b8d5331/v1/supplies    ${json_file}
+    END
+
     RETURN    ${resp}
 
 Process All JSON Files For IV
@@ -130,12 +195,12 @@ Process All JSON Files For IV
     ${json_path}    Set Variable    ${SUITE_PATH}/Data/updated_files.json
     ${json_string}    Get File    ${json_path}
     ${data}    Convert String To JSON    ${json_string}
-    FOR    ${test_case}    IN    @{data.keys()}
-        ${xml_files}=    Get From Dictionary    ${data}    ${test_case}
-        FOR    ${xml_file}    IN    @{xml_files}
-            ${xml_content}=    Get File    ${xml_file}
-            ${resp}=    Send Json File    ${xml_content}    ${xml_file}    ${index}
-        END
+    ${file_groups}=    Get From Dictionary    ${data}    Data
+    ${input_groups}=    Get From Dictionary    ${file_groups}    input
+    ${input_json_files}=    Get From Dictionary    ${input_groups}    json_files
+    FOR    ${json_file}    IN    @{input_json_files}
+        ${xml_content}=    Get File    ${json_file}
+        ${resp}=    Send Json File    ${xml_content}    ${json_file}    ${index}
     END
     RETURN    ${resp}
 
@@ -144,59 +209,13 @@ Process All JSON Files to Validate Response
     ${json_path}    Set Variable    ${SUITE_PATH}/Data/updated_files.json
     ${json_string}    Get File    ${json_path}
     ${data}    Convert String To JSON    ${json_string}
-    FOR    ${test_case}    IN    @{data.keys()}
-        ${xml_files}=    Get From Dictionary    ${data}    ${test_case}
-        FOR    ${xml_file}    IN    @{xml_files}
-            ${xml_content}=    Get File    ${xml_file}
-            Send XML File And Validate Response    ${xml_content}    ${xml_file}    ${index}    ${EXPECTED_ERROR_DESCRIPTION}
-        END
+    ${file_groups}=    Get From Dictionary    ${data}    Data
+    ${input_groups}=    Get From Dictionary    ${file_groups}    input
+    ${input_xml_files}=    Get From Dictionary    ${input_groups}    xml_files
+    FOR    ${xml_file}    IN    @{input_xml_files}
+        ${xml_content}=    Get File    ${xml_file}
+        Send XML File And Validate Response    ${xml_content}    ${xml_file}    ${index}    ${EXPECTED_ERROR_DESCRIPTION}
     END
-
-Process JSON Data
-    [Arguments]    ${json_data}
-    Log    Processing JSON: ${json_data}
-
-Check folders
-    [Arguments]     ${CUR_DIR}
-    Log To Console    curdir in check folders:${CUR_DIR}
-    ${subfolders}=    Process Suite    ${CUR_DIR}
-    RETURN     ${subfolders}
-
-Traverse folders for Json files
-    [Arguments]     ${CUR_DIR}
-    Log To Console    curdir in check folders:${CUR_DIR}
-    ${subfolders}=    Process Suite Json    ${CUR_DIR}
-    RETURN     ${subfolders}
-
-Execute XML
-    [Arguments]    ${xml_file}
-    Log        Executing XML: ${xml_file}
-    ${folder_path}=    Tc Folder        ${xml_file}
-    RETURN     ${folder_path}
-
-Send XML File
-    [Arguments]    ${xml_data}    ${xml_file}    ${index}
-    ${resp}=    Invoke MultiApi by Sending Request    ${xml_data}
-    Log    req:${xml_data}
-    Log    resp:${resp}
-    Log    respContent:${resp.content}
-    Check for MapData    ${xml_data}    ${resp.content}    ${xml_file}
-    Check for ValidateData    ${resp.content}    ${xml_file}    ${index}
-    RETURN    ${resp}
-
-Send Json File
-    [Arguments]    ${xml_data}    ${xml_file}    ${index}
-    ${resp}=    Invoke MultiApi by Sending Request    ${xml_data}
-    Log To Console        req:${xml_data}
-    Log To Console    resp:${resp}
-    RETURN    ${resp}
-
-Send XML File And Validate Response
-    [Arguments]    ${xml_data}    ${xml_file}    ${index}    ${EXPECTED_ERROR_DESCRIPTION}
-    ${resp}=    Invoke MultiApi by Sending Request    ${xml_data}
-    Log    req:${xml_data}
-    Log    resp:${resp}
-    Log    respContent:${resp.content}
     Check for MapData    ${xml_data}    ${resp.content}    ${xml_file}
     Check for ValidateResponse Content    ${resp}    ${xml_file}    ${index}    ${EXPECTED_ERROR_DESCRIPTION}
 
@@ -603,6 +622,54 @@ Create Customer V001
 #
 #    RETURN     ${xml_content}
 
+Extract Release Info From Get Order Details
+    [Arguments]    ${SUITE_PATH}
+    # Called when releaseOrder returns <Output/>.  IBM Sterling OMS only populates
+    # ShipNode / OrderLineKey / ReleaseNo / PrimeLineNo / OrderReleaseKey after the
+    # asynchronous release pipeline completes.  We query getOrderDetails here using
+    # the already-extracted ${OrderNo} and pull every release-time variable from the
+    # response so that downstream keywords (changeOrderStatus, createShipment, etc.)
+    # can substitute them correctly.
+    ${getOrderDetailsRequest}=    Generic Input File Ord    ${SUITE_PATH}    ${getOrderDetails_Input_file_Name}    ${OrderNo}
+    ${detailResp}=    Send Request to a post session    ${getOrderDetailsRequest}
+    ${detail_xml}=    Decode Bytes To String    ${detailResp.content}    UTF-8
+    Log To Console    getOrderDetails response for release extraction: ${detail_xml}
+    ${parsed}=    XML.Parse XML    ${detail_xml}
+    # --- Extract OrderReleaseKey from first OrderRelease element ---
+    ${hasRelease}    ${releaseElem}=    Run Keyword And Ignore Error    XML.Get Element    ${parsed}    .//OrderRelease
+    IF    '${hasRelease}' == 'PASS'
+        ${ork}    ${OrderReleaseKey_Extracted}=    Run Keyword And Ignore Error    XML.Get Element Attribute    ${releaseElem}    OrderReleaseKey
+        IF    '${ork}' == 'PASS' and '${OrderReleaseKey_Extracted}' != 'None' and '${OrderReleaseKey_Extracted}' != ''
+            Log To Console    Extracted OrderReleaseKey from getOrderDetails: ${OrderReleaseKey_Extracted}
+            Set Test Variable    ${OrderReleaseKey_Extracted}
+        END
+    END
+    # --- Extract OrderLineKey, ShipNode, ReleaseNo, PrimeLineNo from first OrderLine ---
+    ${hasLine}    ${lineElem}=    Run Keyword And Ignore Error    XML.Get Element    ${parsed}    .//OrderLine
+    IF    '${hasLine}' == 'PASS'
+        ${s1}    ${OrderLineKey_Extracted}=    Run Keyword And Ignore Error    XML.Get Element Attribute    ${lineElem}    OrderLineKey
+        IF    '${s1}' == 'PASS' and '${OrderLineKey_Extracted}' != 'None' and '${OrderLineKey_Extracted}' != ''
+            Log To Console    Extracted OrderLineKey from getOrderDetails: ${OrderLineKey_Extracted}
+            Set Test Variable    ${OrderLineKey_Extracted}
+        END
+        ${s2}    ${ShipNode_Extracted}=    Run Keyword And Ignore Error    XML.Get Element Attribute    ${lineElem}    ShipNode
+        IF    '${s2}' == 'PASS' and '${ShipNode_Extracted}' != 'None' and '${ShipNode_Extracted}' != ''
+            Log To Console    Extracted ShipNode from getOrderDetails: ${ShipNode_Extracted}
+            Set Test Variable    ${ShipNode_Extracted}
+        END
+        ${s3}    ${ReleaseNo_Extracted}=    Run Keyword And Ignore Error    XML.Get Element Attribute    ${lineElem}    ReleaseNo
+        IF    '${s3}' == 'PASS' and '${ReleaseNo_Extracted}' != 'None' and '${ReleaseNo_Extracted}' != ''
+            Log To Console    Extracted ReleaseNo from getOrderDetails: ${ReleaseNo_Extracted}
+            Set Test Variable    ${ReleaseNo_Extracted}
+        END
+        ${s4}    ${PrimeLineNo_Extracted}=    Run Keyword And Ignore Error    XML.Get Element Attribute    ${lineElem}    PrimeLineNo
+        IF    '${s4}' == 'PASS' and '${PrimeLineNo_Extracted}' != 'None' and '${PrimeLineNo_Extracted}' != ''
+            Log To Console    Extracted PrimeLineNo from getOrderDetails: ${PrimeLineNo_Extracted}
+            Set Test Variable    ${PrimeLineNo_Extracted}
+        END
+    END
+    Set Test Message    Release vars extracted via getOrderDetails: ShipNode=${ShipNode_Extracted}, OrderLineKey=${OrderLineKey_Extracted}, ReleaseNo=${ReleaseNo_Extracted}
+
 Extract Order Info
     [Arguments]    ${resp_content}
     ${parsed}=    XML.Parse XML    ${resp_content}
@@ -689,5 +756,13 @@ Substitute Extracted Variables
     ${has_order_release_key}=    Run Keyword And Return Status    Variable Should Exist    \${OrderReleaseKey_Extracted}
     IF    ${has_order_release_key}
         ${xml_content}=    Replace String    ${xml_content}    \${OrderReleaseKey_Extracted}    ${OrderReleaseKey_Extracted}
+    END
+    ${has_release_no}=    Run Keyword And Return Status    Variable Should Exist    \${ReleaseNo_Extracted}
+    IF    ${has_release_no}
+        ${xml_content}=    Replace String    ${xml_content}    \${ReleaseNo_Extracted}    ${ReleaseNo_Extracted}
+    END
+    ${has_prime_line_no}=    Run Keyword And Return Status    Variable Should Exist    \${PrimeLineNo_Extracted}
+    IF    ${has_prime_line_no}
+        ${xml_content}=    Replace String    ${xml_content}    \${PrimeLineNo_Extracted}    ${PrimeLineNo_Extracted}
     END
     RETURN    ${xml_content}

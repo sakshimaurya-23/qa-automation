@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MultiApi>
+    <API Name="getShipmentList">
+        <Output>
+            <ShipmentList>
+                <Shipment OrderNo="XXXX" ShipNode="" Status="">
+                    <ShipmentLines>
+                        <ShipmentLine OrderNo="XXXX" Quantity="3" ShortageQty="0"/>
+                    </ShipmentLines>
+                </Shipment>
+            </ShipmentList>
+        </Output>
+    </API>
+</MultiApi>

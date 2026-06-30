@@ -1,0 +1,20 @@
+<MultiApi>
+	<API FlowName="CTManageCustomerWrapperSyncService">
+		<Input>
+			<Customer CustomerId="${RandomId}" CustomerType="02" OrganizationCode="CT_Furniture_INC" Status="10">
+				<CustomerContactList>
+					<CustomerContact DateOfBirth="2002-07-07" EmailID="${RandomId}@gmail.com" FirstName="Test" LastName="Customer" MobilePhone="4547438388">
+						<CustomerAdditionalAddressList>
+							<CustomerAdditionalAddress IsDefaultShipTo="Y" IsShipTo="Y">
+								<PersonInfo AddressLine1="608 Pawnee Ave Rule" AddressLine2="Olive Ave Peoria" City="Texas" Country="TX" EMailID="${RandomId}@gmail.com" FirstName="Test" LastName="Customer" Latitude="" Longitude="" MobilePhone="7684338388" State="Arizona" ZipCode="79547"/>
+							</CustomerAdditionalAddress>
+							<CustomerAdditionalAddress IsBillTo="Y" IsDefaultBillTo="Y">
+								<PersonInfo AddressLine1="608 Pawnee Ave Rule" AddressLine2="Olive Ave Peoria" City="Texas" Country="TX" EMailID="${RandomId}@gmail.com" FirstName="Test" LastName="Customer" Latitude="" Longitude="" MobilePhone="7684338388" State="Arizona" ZipCode="79547"/>
+							</CustomerAdditionalAddress>
+						</CustomerAdditionalAddressList>
+					</CustomerContact>
+				</CustomerContactList>
+			</Customer>
+		</Input>
+	</API>
+</MultiApi>

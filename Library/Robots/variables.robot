@@ -6,7 +6,7 @@
 
 # ${CUR_DIR}     ${CURDIR}
 # ${JSON_FILE1}    updated_files.json
-# ${output_foldername}    /Output/
+# ${output_foldername}    /Data/Output/
 # ${actualresult_foldername}    actualresult
 # ${actualresult_file_extension}    .xml
 # ${user}             admin
@@ -142,7 +142,7 @@ Library      ../Scripts/env_variables.py
 
 ${CUR_DIR}     ${CURDIR}
 ${JSON_FILE1}    updated_files.json
-${output_foldername}    /Output/
+${output_foldername}    /Data/Output/
 ${actualresult_foldername}    actualresult
 ${actualresult_file_extension}    .xml
 ${user}             admin
@@ -158,16 +158,16 @@ ${INPUT_DIR}    \\Input\\
 ${SETUP_DIR}    \\setup\\
 
 #compare xmls
-${EXPECTED_XML_FILE}    /expectedResult/expected_result
-${ACTUAL_XML_FILE}      /output/actual_result
-${Expected_Result}    /expectedResult/expected_result.xml
-${ActualResult}        /Output/actual_result.xml
-${expected_result_file}    /ExpectedResult/expectedresult
-${actual_result_file}    /ActualResult/actualresult
+${EXPECTED_XML_FILE}    /Data/expectedResult/expected_result
+${ACTUAL_XML_FILE}      /Data/Output/actual_result
+${Expected_Result}    /Data/expectedResult/expected_result.xml
+${ActualResult}        /Data/Output/actual_result.xml
+${expected_result_file}    /Data/ExpectedResult/expectedresult
+${actual_result_file}    /Data/ActualResult/actualresult
 
 
 #IV testing tokens
-${dev_b_token}    Bearer 75siI7luCAnujXoi3vP0XtkiKgSBw09l
+${dev_b_token}    Bearer y4dUjq0xD9kDOVI74tobHwnbrWpBmyPe
 ${dev_b_server}    https://api.watsoncommerce.ibm.com
 
 #IV testing urls

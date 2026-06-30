@@ -178,8 +178,10 @@ def check_file_contains_mapData(file_path,attribute_name):
     print(f" Checking filename: '{file_name}' (raw)")
     print(f"ASCII Debug: {[ord(c) for c in file_name]}")  # Debug ASCII values
 
-    # Convert to lowercase and check for 'mapData'
-    if attribute_name in cleaned_file_name.lower():
+    # Convert both sides to lowercase for case-insensitive match.
+    # Previously only cleaned_file_name was lowercased, so callers passing
+    # 'ValidateData' (mixed-case) would never match — Bug Fix (Problem 2).
+    if attribute_name.lower() in cleaned_file_name.lower():
         print(" Found 'mapData' in filename!")
         return True
     else:
@@ -195,8 +197,8 @@ def check_file_contains_condition(file_path,attribute_name):
     print(f" Checking filename: '{file_name}' (raw)")
     print(f"ASCII Debug: {[ord(c) for c in file_name]}")  # Debug ASCII values
 
-    # Convert to lowercase and check for 'mapData'
-    if attribute_name in cleaned_file_name.lower():
+    # Convert both sides to lowercase for case-insensitive match (mirrors fix in check_file_contains_mapData).
+    if attribute_name.lower() in cleaned_file_name.lower():
         print(" Found 'mapData' in filename!")
         return True
     else:
@@ -299,7 +301,10 @@ def write_actual_result(output1, output, folder_path):
 
     current_index = index_tracker["index"]  # Store current index before incrementing
 
-    file_path = _os.path.join(folder_path1, "ActualResult", f"{output}{current_index}.xml")
+    # Write to Data/ActualResult/ directory (not root ActualResult/)
+    actual_result_dir = _os.path.join(folder_path1, "Data", "ActualResult")
+    _os.makedirs(actual_result_dir, exist_ok=True)  # Auto-create if missing
+    file_path = _os.path.join(actual_result_dir, f"{output}{current_index}.xml")
 
     # Ensure output1 is a string
     if isinstance(output1, bytes):
@@ -323,7 +328,10 @@ def write_actual_result_with_pretty_print(output1, output, folder_path):
 
     current_index = index_tracker["index"]  # Store current index before incrementing
 
-    file_path = _os.path.join(folder_path1, "ActualResult", f"{output}{current_index}.xml")
+    # Write to Data/ActualResult/ directory (not root ActualResult/)
+    actual_result_dir = _os.path.join(folder_path1, "Data", "ActualResult")
+    _os.makedirs(actual_result_dir, exist_ok=True)  # Auto-create if missing
+    file_path = _os.path.join(actual_result_dir, f"{output}{current_index}.xml")
 
     # Ensure output1 is a string
     if isinstance(output1, bytes):

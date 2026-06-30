@@ -1,7 +1,7 @@
 <MultiApi>
 	<API Name="changeOrderStatus">
 		<Input>
-			<OrderStatusChange BaseDropStatus="1300.01" ChangeForAllAvailableQty="Y" DocumentType="0001" EnterpriseCode="CT_Furniture_INC" IgnoreTransactionDependencies="Y" OrderHeaderKey="" OrderNo="${OrderNo}" OrderReleaseKey="" TransactionId="INCLUDED_IN_SHIPMENT.0001.ex">
+			<OrderStatusChange BaseDropStatus="1300.01" ChangeForAllAvailableQty="Y" DocumentType="0001" EnterpriseCode="CT_Furniture_INC" IgnoreTransactionDependencies="Y" OrderHeaderKey="" OrderNo="${OrderNo}" OrderReleaseKey="" TransactionId="READY_FOR_SHIP.0001.ex">
 			</OrderStatusChange>
 		</Input>
 	</API>

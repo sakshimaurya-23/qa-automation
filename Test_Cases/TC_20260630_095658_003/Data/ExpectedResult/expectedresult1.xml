@@ -1,0 +1,15 @@
+<MultiApi>
+	<API Name="getOrderList">
+		<Output>
+			<OrderList LastOrderHeaderKey="XXXX" LastRecordSet="Y" ReadFromHistory="" TotalOrderList="1">
+				<Order MinOrderStatus="1100" OrderNo="XXXX">
+					<OrderLines>
+						<OrderLine OrderedQty="1.00">
+							<ItemDetails ItemID="XXXX" />
+						</OrderLine>
+					</OrderLines>
+				</Order>
+			</OrderList>
+		</Output>
+	</API>
+</MultiApi>

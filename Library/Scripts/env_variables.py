@@ -8,7 +8,7 @@ ENVIRONMENTS = {
         "URL": "https://cityf-dev-1.oms.supply-chain.ibm.com/",
         "USERNAME": "admin",
         "PASSWORD": "password",
-        "CERTlOCATION": "/Users/sakshimaurya/Testing_v2.0/owner=jeevitha.p12",
+        "CERTlOCATION": "/Users/sakshimaurya/Last_Testing/owner=jeevitha.p12",
         # "CERTlOCATION": "C://projects//city//tech//certificates//dev//dev.p12",
         "CERTPASSWORD": "password",
         # "CERTPASSWORD": "a12345678"

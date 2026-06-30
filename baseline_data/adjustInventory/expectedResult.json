@@ -4,7 +4,7 @@
             "itemId": "${RandomId}",
             "unitOfMeasure": "EACH",
             "productClass": "GOOD",
-            "shipNode": "CT_Furniture_INC",
+            "shipNode": "1",
             "type": "ONHAND",
             "changedQuantity": 10,
             "adjustmentReason": "ABSOLUTE"
