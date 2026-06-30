@@ -1,7 +1,0 @@
-<MultiApi>
-	<API Name="releaseOrder">
-		<Input>
-			<ReleaseOrder DocumentType="0001" EnterpriseCode="CT_Furniture_INC" IgnoreTransactionDependencies="Y" OrderNo="${OrderNo}"/>
-		</Input>
-	</API>
-</MultiApi>
