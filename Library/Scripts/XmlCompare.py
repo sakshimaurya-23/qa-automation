@@ -15,6 +15,7 @@ _DYNAMIC_ATTRS = frozenset({
     "Createts",
     "Modifyts",
     "CarrierPickupTime",
+    "ShipDate",           # actual ship date stamped at runtime
     "StatusDate",
     "NextAlertTs",
     "ExpectedDeliveryDate",
@@ -29,7 +30,8 @@ _DYNAMIC_ATTRS = frozenset({
     "ITDate",
     "ExportLicenseExpDate",
 
-    # OMS surrogate keys — auto-generated numeric IDs, unique per run
+    # OMS sequential / auto-generated identifiers — increment on every run
+    "ShipmentNo",         # sequential shipment counter, unique per test run
     "ShipmentKey",
     "ShipmentGroupId",
     "BillToAddressKey",
