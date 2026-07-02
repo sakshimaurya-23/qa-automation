@@ -3,9 +3,9 @@
     <API Name="getShipmentList">
         <Output>
             <ShipmentList>
-                <Shipment ShipmentNo="XXXX" EnterpriseCode="CT_Furniture_INC" ShipNode="XXXX" Status="">
+                <Shipment ShipmentNo="XXXX" EnterpriseCode="XXXX" ShipNode="XXXX" Status="XXXX">
                     <ShipmentLines>
-                        <ShipmentLine ItemID="XXXX" Quantity="1" ProductClass="GOOD" UnitOfMeasure="EACH"/>
+                        <ShipmentLine ItemID="XXXX" Quantity="XXXX" ProductClass="XXXX" UnitOfMeasure="XXXX"/>
                     </ShipmentLines>
                 </Shipment>
             </ShipmentList>

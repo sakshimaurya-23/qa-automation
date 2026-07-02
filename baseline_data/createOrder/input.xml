@@ -4,7 +4,7 @@
 <Order Action="CREATE" AllocationRuleID="CITY_SHP" BillToID="" BuyerOrganizationCode="CT_Furniture_INC" CustomerEMailID="kpvj@gmail.com" DocumentType="0001" EnteredBy="14" EnterpriseCode="CT_Furniture_INC" EntryType="MozuOrder" NotificationType="E" OrderDate="2025-07-21T00:57:35+00:00" PaymentStatus="PAID" SellerOrganizationCode="CT_Furniture_INC">
 	<Extn ExtnDeliveryPref="E" ExtnNotificationEmail="vj@test.com" ExtnOrderCaptureId="${RandomId}" ExtnclassExceptionId="1" ExtndayOfferId="1" ExtndeliveryTimeWindow="1" ExtnhasDeliveryRestriction="1" ExtnserviceChargeId="1" ExtnserviceTypeId="1" ExtntimeOfferId="1"/>
 	<OrderLines>
-		<OrderLine DeliveryMethod="SHP" IsProcurementAllowed="Y" ItemGroupCode="PROD" OrderedQty="1.00" PrimeLineNo="1" ReqDeliveryDate="2025-07-21T00:57:35+00:00" ShipNode="1" IsFirmPredefinedNode="Y">
+		<OrderLine DeliveryMethod="SHP" IsFirmPredefinedNode="Y" IsProcurementAllowed="Y" ItemGroupCode="PROD" OrderedQty="1.00" PrimeLineNo="1" ReqDeliveryDate="2025-07-21T00:57:35+00:00" ShipNode="1">
 			<Item CostCurrency="USD" ItemDesc="" ItemID="${RandomId}" ProductClass="GOOD" UnitOfMeasure="EACH"/>
 			<Extn ExtnElevatorReservationFlag="N"/>
 			<LinePriceInfo UnitPrice="2"/>

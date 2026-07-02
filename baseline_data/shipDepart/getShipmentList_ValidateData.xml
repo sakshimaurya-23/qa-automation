@@ -1,11 +1,11 @@
 <MultiApi>
 	<API Name="getShipmentList">
 		<Input>
-			<Shipment OrderNo="${OrderNo}" ShipNode="" />
+			<Shipment OrderNo="${OrderNo}" ShipmentNo="${ShipmentNo_Extracted}" ShipNode="" />
 		</Input>
 		<Template>
 			<ShipmentList>
-				<Shipment OrderNo="${OrderNo}" ShipNode="" Status="">
+				<Shipment OrderNo="${OrderNo}" ShipmentNo="${ShipmentNo_Extracted}" ShipNode="" Status="">
 					<ShipmentLines>
 						<ShipmentLine OrderNo="${OrderNo}" Quantity="" ShortageQty=""/>
 					</ShipmentLines>

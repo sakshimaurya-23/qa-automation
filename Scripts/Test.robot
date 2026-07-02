@@ -1,6 +1,7 @@
 
 *** Settings ***
 Resource    ${CURDIR}/../../Library/Robots/keywords.robot
+Test Setup    Reset Order Lifecycle Variables
 
 *** Variables ***
 ${CUR_DIR}     ${CURDIR}

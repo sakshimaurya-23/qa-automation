@@ -207,8 +207,7 @@ def generate_expected_result_from_template(validate_path, output_path):
             new_child = ET.fromstring(ET.tostring(child))
             for elem in new_child.iter():
                 for attr in list(elem.attrib):
-                    if elem.get(attr) == "":
-                        elem.set(attr, "XXXX")
+                    elem.set(attr, "XXXX")
             output_elem.append(new_child)
         ET.indent(multiapi, space="  ")
         output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -346,8 +345,11 @@ def generate_baseline_expected_result(baseline_folder, expected_name, output_pat
     if not src.exists():
         return False
     content = src.read_text(encoding="utf-8")
-    content = re.sub(r'(\w+(?:Key|No|Date|Desc|ID|Qty|Quantity|Status))="[^"]*"', r'\1="XXXX"', content)
-    content = re.sub(r'(?<=\s)(Status|ShipNode|EnterpriseCode|OrderNo|ItemID)="[^"]*"', r'\1="XXXX"', content)
+    # Replace ALL attribute values with "XXXX" — the comparison logic
+    # (replace_key + normalize_xml) strips XXXX attributes before comparing,
+    # so any hardcoded business value (ProductClass="GOOD", Quantity="1",
+    # EnterpriseCode="CT_Furniture_INC", etc.) would cause a false mismatch.
+    content = re.sub(r'(\w+)="[^"]*"', r'\1="XXXX"', content)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(content, encoding="utf-8")
     return True

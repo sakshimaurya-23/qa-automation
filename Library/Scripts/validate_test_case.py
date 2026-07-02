@@ -48,7 +48,8 @@ def _get_api_name(root: etree._Element) -> str | None:
     Extract the API Name from an OMS XML file.
     Checks two locations used across the codebase:
       1. <MultiApi><API Name="...">    — ValidateData / response wrapper
-      2. Root attribute API="..."      — some input files
+      2. <MultiApi><API FlowName="..."> — input files using service flows
+      3. Root attribute API="..."      — some input files
     Returns None if not found.
     """
     # Pattern 1: <API Name="..."> anywhere in the tree
@@ -56,7 +57,12 @@ def _get_api_name(root: etree._Element) -> str | None:
         name = elem.get("Name")
         if name:
             return name
-    # Pattern 2: root-level APIName attribute (some OMS templates)
+    # Pattern 2: <API FlowName="..."> — input files using service flow names
+    for elem in root.iter("API"):
+        name = elem.get("FlowName")
+        if name:
+            return name
+    # Pattern 3: root-level APIName attribute (some OMS templates)
     name = root.get("APIName") or root.get("ApiName")
     if name:
         return name
@@ -113,6 +119,81 @@ def _expected_result_number(validate_filename: str, validate_files_sorted: list[
     so we can find the paired expectedresult file.
     """
     return validate_files_sorted.index(validate_filename) + 1
+
+
+PLACEHOLDER_RE = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)\}")
+
+# Maps an extraction-variable placeholder to the API(s) whose response is the
+# only thing in the pipeline that actually populates it (per keywords.robot's
+# Extract * keywords). If a file references the placeholder but no earlier
+# file in the same Input/ folder was produced by one of these APIs, the
+# placeholder can never be resolved at runtime and keywords.robot will
+# silently SKIP the file (suite still reports overall PASS).
+PLACEHOLDER_PRODUCERS = {
+    # FIX Issue 4 — ShipmentNo_Extracted can now also be populated by the
+    # getShipmentList fallback inside Extract Release Info From Get Order Details
+    # (triggered when releaseOrder returns <Output/> and getOrderDetails template
+    # does not include a <Shipment> node).  Add getShipmentList as a valid producer
+    # so the pre-flight validator no longer flags this as an unresolvable placeholder.
+    "ShipmentNo_Extracted": {"createShipment", "getShipmentList"},
+    "OrderNo": {"createOrder", "scheduleOrder", "CTCreateOrderSyncService"},
+    "OrderHeaderKey": {"createOrder", "scheduleOrder", "CTCreateOrderSyncService"},
+    # OrderLineKey_Extracted is extracted by Extract Shipment Info from createShipment
+    # response (keywords.robot line 1891), and also by Extract Order Info / Extract Order
+    # Line Key / Extract Release Info From Get Order Details from other API responses.
+    "OrderLineKey_Extracted": {"createOrder", "scheduleOrder", "getOrderDetails", "getShipmentList", "createShipment", "CTCreateOrderSyncService"},
+    # ShipNode_Extracted is extracted by Extract Shipment Info from createShipment
+    # response (keywords.robot line 1881), and also by other extraction keywords.
+    "ShipNode_Extracted": {"createOrder", "scheduleOrder", "getOrderDetails", "getShipmentList", "createShipment", "CTCreateOrderSyncService"},
+    # OrderReleaseKey_Extracted is extracted by Extract Shipment Info from createShipment
+    # response (keywords.robot line 1892), and also by Extract Release Info From Get Order Details.
+    "OrderReleaseKey_Extracted": {"releaseOrder", "getOrderDetails", "getShipmentList", "createShipment"},
+    "ReleaseNo_Extracted": {"releaseOrder", "getOrderDetails"},
+    "PrimeLineNo_Extracted": {"createOrder", "scheduleOrder", "getOrderDetails", "CTCreateOrderSyncService"},
+}
+
+
+def check_unresolvable_placeholders(tc_path: Path) -> list[dict]:
+    """
+    Scan Data/Input/*.xml in file-number order. For each ${placeholder} found
+    in a file's raw text that has a known producer set in PLACEHOLDER_PRODUCERS,
+    verify some earlier-numbered file's API Name matches a producer. Reports any
+    placeholder that has no possible producer anywhere earlier in the sequence —
+    these will always be unresolved at runtime regardless of execution order.
+    """
+    input_dir = tc_path / "Data" / "Input"
+    if not input_dir.exists():
+        return []
+
+    files = sorted(input_dir.glob("*.xml"), key=lambda f: _number_from_filename(f.name))
+    seen_apis: set[str] = set()
+    problems = []
+
+    for f in files:
+        try:
+            text = f.read_text(encoding="utf-8")
+        except Exception:
+            continue
+
+        for placeholder in set(PLACEHOLDER_RE.findall(text)):
+            producers = PLACEHOLDER_PRODUCERS.get(placeholder)
+            if not producers:
+                continue
+            if not (producers & seen_apis):
+                problems.append({
+                    "file": f.name,
+                    "placeholder": placeholder,
+                    "needs_one_of": sorted(producers),
+                })
+
+        root = _parse_xml(f)
+        if root is not None:
+            api_name = _get_api_name(root) or root.get("FlowName")
+            if api_name:
+                seen_apis.add(api_name)
+
+    return problems
+
 
 
 def validate_test_case(tc_path: Path, baseline_path: Path | None = None) -> list[dict]:
@@ -211,8 +292,9 @@ def validate_test_case(tc_path: Path, baseline_path: Path | None = None) -> list
         # Try to locate a fix source in baseline_data
         if baseline_path and issue["validate_api"]:
             # The correct expectedResult.xml lives in baseline_data/<APIFolder>/expectedResult.xml
-            # We find the folder whose ValidateData file matches the validate API name
-            fix_source = _find_fix_source(baseline_path, issue["validate_api"])
+            # Prefer a baseline folder whose ValidateData filename matches exactly, because
+            # multiple baseline folders can share the same API name (e.g. getShipmentList).
+            fix_source = _find_fix_source(baseline_path, issue["validate_api"], issue["validate_file"])
             issue["fix_source"] = fix_source
 
         issues.append(issue)
@@ -220,11 +302,13 @@ def validate_test_case(tc_path: Path, baseline_path: Path | None = None) -> list
     return issues
 
 
-def _find_fix_source(baseline_path: Path, api_name: str) -> Path | None:
+def _find_fix_source(baseline_path: Path, api_name: str, validate_file: str | None = None) -> Path | None:
     """
     Search baseline_data subfolders for an expectedResult.xml that belongs to `api_name`.
-    Strategy: the subfolder name typically matches the API name (case-insensitive).
-    Falls back to scanning each subfolder's ValidateData file for an API Name match.
+    Strategy order:
+    1. Direct folder name match.
+    2. If validate_file is known, prefer the baseline folder whose ValidateData filename matches it.
+    3. Fall back to scanning each subfolder's ValidateData file for an API Name match.
     """
     # Direct folder name match first (fast path)
     for candidate in baseline_path.iterdir():
@@ -234,6 +318,19 @@ def _find_fix_source(baseline_path: Path, api_name: str) -> Path | None:
             er = candidate / "expectedResult.xml"
             if er.exists():
                 return er
+
+    # Prefer an exact ValidateData filename match when multiple baseline folders share
+    # the same API name (for example createShipment/getShipmentList_ValidateData.xml and
+    # shipDepart/getShipmentList_ValidateData.xml both use API Name="getShipmentList").
+    if validate_file:
+        for candidate in baseline_path.iterdir():
+            if not candidate.is_dir():
+                continue
+            exact_vd = candidate / validate_file
+            if exact_vd.exists():
+                er = candidate / "expectedResult.xml"
+                if er.exists():
+                    return er
 
     # Slow path: read each ValidateData file
     for candidate in baseline_path.iterdir():
@@ -346,6 +443,17 @@ def main():
         print(f"Validating: {tc_path.name}")
         issues = validate_test_case(tc_path, baseline)
         _report_issues(tc_path.name, issues)
+
+        placeholder_problems = check_unresolvable_placeholders(tc_path)
+        if placeholder_problems:
+            print(f"  ❌  {tc_path.name} — {len(placeholder_problems)} unresolvable placeholder(s):\n")
+            for p in placeholder_problems:
+                print(f"     {p['file']}: \\${{{p['placeholder']}}} has no producing step "
+                      f"(needs one of: {', '.join(p['needs_one_of'])}) earlier in Data/Input/")
+            print(f"     This file will be SILENTLY SKIPPED at runtime — the suite will still "
+                  f"report PASS but this step never executes. Add the missing prerequisite step.")
+            print()
+            total_issues += len(placeholder_problems)
 
         if issues and baseline:
             fixed = _apply_fixes(tc_path, issues)

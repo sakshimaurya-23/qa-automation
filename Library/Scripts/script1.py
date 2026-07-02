@@ -14,6 +14,16 @@ import xml.dom.minidom
 first_iteration = True
 index_tracker = {"index": 1, "last_folder": None}  # Track index & last used folder
 
+def reset_index_tracker():
+    """Reset the actualresult index counter to 1.
+    Call this at the start of each Robot Framework test case (via Test Setup) so that
+    multiple FOR-loop iterations in a single test do not accumulate the counter across
+    calls to write_actual_result, which would misalign actualresultN.xml with
+    expectedresultN.xml.
+    """
+    index_tracker["index"] = 1
+    index_tracker["last_folder"] = None
+
 def generate_7_digit_unique_id():
     return str(random.randint(1000000, 9999999))
 
