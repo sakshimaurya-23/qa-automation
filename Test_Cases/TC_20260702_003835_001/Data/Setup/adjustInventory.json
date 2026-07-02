@@ -1,0 +1,16 @@
+{
+    "supplies": [
+        {
+            "itemId": "${RandomId}",
+            "unitOfMeasure": "EACH",
+            "productClass": "GOOD",
+            "shipNode": "1",
+            "type": "ONHAND",
+            "eta": "1900-01-01T00:00:00Z",
+            "shipByDate": "2500-01-01T00:00:00Z",
+            "changedQuantity": 10,
+            "adjustmentReason": "ABSOLUTE"
+        }
+    ],
+    "enableFulfillmentOption": true
+}

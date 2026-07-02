@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MultiApi><API Name="getOrderList"><Output><OrderList LastOrderHeaderKey="2026070120311915738650" LastRecordSet="Y" ReadFromHistory="" TotalOrderList="1"><Order MinOrderStatus="1500" OrderNo="Y100010482"><OrderLines><OrderLine OrderedQty="1.00"><ItemDetails ItemID="4330298"/></OrderLine></OrderLines></Order></OrderList></Output></API></MultiApi>

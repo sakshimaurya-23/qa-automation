@@ -1,0 +1,42 @@
+<MultiApi>
+	<API FlowName="CTCreateOrderSyncService">
+		<Input>
+<Order Action="CREATE" AllocationRuleID="CITY_SHP" BillToID="" BuyerOrganizationCode="CT_Furniture_INC" CustomerEMailID="kpvj@gmail.com" DocumentType="0001" EnteredBy="14" EnterpriseCode="CT_Furniture_INC" EntryType="MozuOrder" NotificationType="E" OrderDate="2025-07-21T00:57:35+00:00" PaymentStatus="PAID" SellerOrganizationCode="CT_Furniture_INC">
+	<Extn ExtnDeliveryPref="E" ExtnNotificationEmail="vj@test.com" ExtnOrderCaptureId="${RandomId}" ExtnclassExceptionId="1" ExtndayOfferId="1" ExtndeliveryTimeWindow="1" ExtnhasDeliveryRestriction="1" ExtnserviceChargeId="1" ExtnserviceTypeId="1" ExtntimeOfferId="1"/>
+	<OrderLines>
+		<OrderLine DeliveryMethod="SHP" IsFirmPredefinedNode="Y" IsProcurementAllowed="Y" ItemGroupCode="PROD" OrderedQty="1.00" PrimeLineNo="1" ReqDeliveryDate="2025-07-21T00:57:35+00:00" ShipNode="1">
+			<Item CostCurrency="USD" ItemDesc="" ItemID="${RandomId}" ProductClass="GOOD" UnitOfMeasure="EACH"/>
+			<Extn ExtnElevatorReservationFlag="N"/>
+			<LinePriceInfo UnitPrice="2"/>
+		</OrderLine>
+	</OrderLines>
+	<Instructions>
+		<Instruction InstructionText="(000) 000-0000 (000) 000-0000" InstructionType="LABELMSG" SequenceNo="1"/>
+	</Instructions>
+	<PersonInfoShipTo AddressLine1="kpvj HEALTH SERVICES" AddressLine2="4822 50TH ST SEDGEWICK" AddressLine3="kpvj" City="SEDGEWICK" Country="US" DayPhone="" EMailID="san@gmail.com" FirstName="kp" LastName="vj FROM PROVINCE A" MobilePhone="" OtherPhone="" State="MA" ZipCode="02116"/>
+	<PersonInfoBillTo AddressLine1="kpvj HEALTH SERVICES" AddressLine2="4822 50TH ST SEDGEWICK" AddressLine3="kpvj" City="SEDGEWICK" Country="US" DayPhone="" EMailID="san@gmail.com" FirstName="kp" LastName="vj FROM PROVINCE A" MobilePhone="" OtherPhone="" State="MA" ZipCode="02116"/>
+	<HeaderCharges>
+		<HeaderCharge ChargeAmount="2" ChargeCategory="Warranty" ChargeName="InHomeServiceType"/>
+		<HeaderCharge ChargeAmount="2" ChargeCategory="Warranty" ChargeName="FabricProtection"/>
+		<HeaderCharge ChargeAmount="2" ChargeCategory="Discount" ChargeName="discountSource"/>
+	</HeaderCharges>
+	<HeaderTaxes>
+		<HeaderTax Tax="1" TaxName="TAX" TaxPercentage=""/>
+	</HeaderTaxes>
+	<PaymentMethods>
+		<PaymentMethod CreditCardNo="1/KRBI3a6nQoqt7aupeR8t8BAAIOsMMR/X9gF5hHt29IoE4ws=" DisplayCreditCardNo="8431" UnlimitedCharges="N" PaymentReference1="BRAINTREE" PaymentReference2="33aa333a" PaymentReference3="A">
+			<PaymentDetailsList>
+				<PaymentDetails AuthorizationID="1234" ChargeType="CHARGE" ProcessedAmount="215.78" RequestAmount="215.78"/>
+			</PaymentDetailsList>
+		</PaymentMethod>
+	</PaymentMethods>
+	<OrderDates>
+		<OrderDate ActualDate="2016-06-27T00:00:00" DateTypeId="deliveryDate"/>
+	</OrderDates>
+	<References>
+		<Reference Name="KiboOrderId" Value="rp-prod-184159"/>
+	</References>
+</Order>
+		</Input>
+	</API>
+</MultiApi>

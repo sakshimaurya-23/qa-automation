@@ -3,12 +3,62 @@ from robot.api import logger
 from collections import defaultdict
 
 
+# ---------------------------------------------------------------------------
+# Run-specific dynamic attributes — these change on every test execution
+# (timestamps, surrogate keys, auto-generated IDs) and must never be compared
+# between the stored expected file and a fresh actual response.
+# Business-meaningful attributes (EnterpriseCode, DocumentType, DeliveryMethod,
+# ItemID, Quantity, Status, etc.) are NOT in this list and ARE compared.
+# ---------------------------------------------------------------------------
+_DYNAMIC_ATTRS = frozenset({
+    # OMS audit timestamps — change on every API call
+    "Createts",
+    "Modifyts",
+    "CarrierPickupTime",
+    "StatusDate",
+    "NextAlertTs",
+    "ExpectedDeliveryDate",
+    "ExpectedPickDate",
+    "ExpectedShipmentDate",
+    "RequestedDeliveryDate",
+    "RequestedShipmentDate",
+    "MustShipBeforeDate",
+    "DeliveryTS",
+    "FromAppointment",
+    "ToAppointment",
+    "ITDate",
+    "ExportLicenseExpDate",
+
+    # OMS surrogate keys — auto-generated numeric IDs, unique per run
+    "ShipmentKey",
+    "ShipmentGroupId",
+    "BillToAddressKey",
+    "FromAddressKey",
+    "ToAddressKey",
+    "OrderHeaderKey",
+    "OrderLineKey",
+    "OrderReleaseKey",
+    "PipelineKey",
+
+    # Lock/version counters — increment on every write
+    "Lockid",
+})
+
+
 def compare_xml(expected_xml, actual_xml):
     """
     Compare two XML documents recursively.
-    Ignores whitespace, attribute ordering, and child element ordering.
-    Logs differences in nodes, text, and attributes.
-    Fails if any difference is found.
+
+    Ignores:
+      - whitespace and attribute ordering
+      - child element ordering (multi-set semantics per tag group)
+      - attributes listed in _DYNAMIC_ATTRS (timestamps, surrogate keys)
+      - attributes whose expected value is "XXXX" (explicit wildcard)
+      - the Status attribute (validated separately via getOrderDetails)
+
+    Validates all other attribute values, including all business-meaningful
+    fields (EnterpriseCode, DocumentType, DeliveryMethod, ItemID, Quantity,
+    ShipNode, NumOfCartons, etc.).
     """
     parser = etree.XMLParser(remove_blank_text=True)
 
@@ -30,22 +80,22 @@ def compare_xml_structure_only(expected_xml, actual_xml):
     """
     Verify the EXPECTED document's element tree has the EXACT SAME shape as the
     ACTUAL document's element tree — same tag at every nesting position, same child
-    counts under every parent. Attribute VALUES are never compared; only tag names
+    counts under every parent.  Attribute VALUES are never compared; only tag names
     and child counts matter.
 
     A correctly-seeded expected file always mirrors a real OMS response's shape
-    exactly. Any structural divergence in EITHER direction (expected missing a child
+    exactly.  Any structural divergence in EITHER direction (expected missing a child
     actual has, OR expected having a child actual doesn't) means expected was not
     seeded from a real response of this shape — e.g. a leftover hand-authored
     <Template> skeleton, or a response captured from a different API path.
 
     Used as a content-quality guard before the real value-by-value comparison runs,
     to catch stale or malformed expected files regardless of which design document or
-    CSV mapping sheet generated the test case. This check is purely content-based —
+    CSV mapping sheet generated the test case.  This check is purely content-based —
     it never looks at filenames, test case IDs, or document origin — so it self-heals
     the same way for every future test case, independent of which design doc was used.
 
-    Returns True if structurally identical, False otherwise (signaling expected
+    Returns True if structurally identical, False otherwise (signalling expected
     should be re-seeded from actual).
     """
     parser = etree.XMLParser(remove_blank_text=True)
@@ -81,7 +131,6 @@ def _normalize_quantity(value):
     if value is None:
         return None
     try:
-        # Convert to float then to int if it's a whole number, otherwise keep as float
         num = float(value)
         if num == int(num):
             return str(int(num))
@@ -91,7 +140,7 @@ def _normalize_quantity(value):
 
 
 # Tag aliasing: OMS sometimes returns a different wrapper element name than what
-# was baselined (e.g. <Shipments> vs <ShipmentList>). Each alias group below is
+# was baselined (e.g. <Shipments> vs <ShipmentList>).  Each alias group below is
 # treated as equivalent for BOTH the tag-identity check and the child-grouping
 # step, so mismatches never surface as spurious "expected N, actual 0" diffs.
 _TAG_ALIAS_GROUPS = [
@@ -131,23 +180,32 @@ def _compare_elements(exp_elem, act_elem, diffs, path):
 
     # Compare attributes (order-insensitive)
     all_attrs = set(exp_elem.attrib.keys()).union(act_elem.attrib.keys())
-    for attr in all_attrs:
+    for attr in sorted(all_attrs):
         exp_val = exp_elem.attrib.get(attr)
         act_val = act_elem.attrib.get(attr)
-        # "XXXX" in the expected file is a wildcard — skip comparison for that attribute
+
+        # Explicit wildcard in the expected file — skip this attribute entirely
         if exp_val == "XXXX":
             continue
-        # Issue 1 fix: Skip Status attribute comparison (validated separately via getOrderDetails)
+
+        # Run-specific dynamic attributes (timestamps, surrogate keys, lock counters)
+        # — values change on every test run and must never be compared
+        if attr in _DYNAMIC_ATTRS:
+            continue
+
+        # Status is validated separately via getOrderDetails polling
         if attr == "Status":
             continue
-        # Issue 2 fix: Numeric normalization - treat "1" and "1.00" as equal for quantity-like attributes
+
+        # Numeric normalisation — treat "1" and "1.00" as equal for quantity attributes
         if attr in ("Quantity", "OrderedQty", "ShortageQty", "ConfirmedQty", "BackorderedQty"):
             if _normalize_quantity(exp_val) == _normalize_quantity(act_val):
                 continue
+
         if exp_val != act_val:
             diffs.append(f"{path}/@{attr}: expected '{exp_val}', actual '{act_val}'")
 
-    # Compare text (trim whitespace)
+    # Compare text content (trim whitespace)
     exp_text = (exp_elem.text or "").strip()
     act_text = (act_elem.text or "").strip()
     if exp_text != act_text:
